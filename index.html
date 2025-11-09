@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎁 El Rincón de la Tati — Catálogo</title>
+  <title>🎁 El Rincón de la Tati – Catálogo</title>
 
   <style>
     body {
@@ -40,14 +40,13 @@
     }
 
     .producto {
-     background-color: #fffaf5;         /* tono cálido */
-     border: 3px solid #d4af37;         /* borde dorado elegante */
+     background-color: #fffaf5;
+     border: 3px solid #d4af37;
      border-radius: 15px;
      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-     padding: 10px;                     /* mantiene espacio interno */
-     overflow: hidden;                  /* evita que la imagen se salga del cuadro */
+     padding: 10px;
+     overflow: hidden;
      transition: transform 0.2s ease-in-out;
-
     }
 
     .producto:hover {
@@ -59,18 +58,17 @@
       height: 250px;                     
       object-fit: contain;              
       border-radius: 10px;
-      background-color: #fff;          
+      background-color: #fff;
      }
     
-/* ✅ Ajuste para celulares */
-@media (max-width: 600px) {
-  .producto img {
-    height: auto;              
-    object-fit: contain;       
-    background-color: #fff;    
-    padding: 8px;              
-  }
-}
+    @media (max-width: 600px) {
+      .producto img {
+        height: auto;              
+        object-fit: contain;       
+        background-color: #fff;    
+        padding: 8px;              
+      }
+    }
 
     .precio {
       font-weight: bold;
@@ -93,8 +91,74 @@
       background-color: #c0392b;
     }
 
-    .btn-elegir.activo {
+    /* Contenedor de controles de cantidad */
+    .cantidad-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      animation: aparecer 0.3s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .btn-cantidad {
       background-color: #27ae60;
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .btn-cantidad:hover {
+      background-color: #229954;
+      transform: scale(1.1);
+    }
+
+    .btn-cantidad:active {
+      transform: scale(0.95);
+    }
+
+    .cantidad-numero {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #27ae60;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .btn-quitar {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: 0.3s;
+      margin-top: 8px;
+    }
+
+    .btn-quitar:hover {
+      background-color: #c0392b;
     }
 
     .btn-ver {
@@ -128,73 +192,116 @@
       color: #777;
       margin-top: 6px;
     }
-/*----------------------------*/
+
    #resumen {
-  background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
-  border: 2px solid #d4af37;           /* borde dorado elegante */
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  padding: 25px;
-  max-width: 600px;
-  margin: 30px auto;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  transition: transform 0.2s ease-in-out;
-}
+      background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
+      border: 2px solid #d4af37;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      padding: 25px;
+      max-width: 600px;
+      margin: 30px auto;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      transition: transform 0.2s ease-in-out;
+    }
 
-#resumen:hover {
-  transform: scale(1.02);
-}
+    #resumen:hover {
+      transform: scale(1.02);
+    }
 
-#resumen h3 {
-  font-size: 1.5em;
-  color: #b22222;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #d4af37;
-  display: inline-block;
-  padding-bottom: 5px;
-}
+    #resumen h3 {
+      font-size: 1.5em;
+      color: #b22222;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #d4af37;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
 
-#resumen p {
-  font-size: 1.1em;
-  color: #333;
-  margin: 8px 0;
-}
+    #resumen p {
+      font-size: 1.1em;
+      color: #333;
+      margin: 8px 0;
+    }
 
-#resumen input {
-  width: 85%;
-  padding: 12px;
-  border: 2px solid #d4af37;
-  border-radius: 10px;
-  font-size: 1em;
-  margin-top: 15px;
-  outline: none;
-  text-align: center;
-}
+    .resumen-item {
+      background: white;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 4px solid #d4af37;
+      text-align: left;
+    }
 
-#resumen input:focus {
-  border-color: #b22222;
-  box-shadow: 0 0 8px rgba(178, 34, 34, 0.3);
-}
+    .resumen-producto {
+      font-weight: bold;
+      color: #5A1E1E;
+    }
 
-#resumen button {
-  background-color: #25d366; /* color WhatsApp */
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 1.1em;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    .resumen-cantidad {
+      color: #27ae60;
+      font-weight: bold;
+    }
 
-#resumen button:hover {
-  background-color: #1ebe57;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
+    .resumen-subtotal {
+      color: #B22222;
+      font-weight: bold;
+      float: right;
+    }
 
-/*----------------------------*/
+    .total-final {
+      background: #d4af37;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    #resumen input {
+      width: 85%;
+      padding: 12px;
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      font-size: 1em;
+      margin-top: 15px;
+      outline: none;
+      text-align: center;
+    }
+
+    #resumen input:focus {
+      border-color: #b22222;
+      box-shadow: 0 0 8px rgba(178, 34, 34, 0.3);
+    }
+
+    #resumen button {
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #resumen button:hover {
+      background-color: #1ebe57;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .btn-limpiar {
+      background-color: #e67e22 !important;
+      margin-left: 10px;
+    }
+
+    .btn-limpiar:hover {
+      background-color: #d35400 !important;
+    }
+
     .btn-whatsapp {
       background-color: #25D366;
       color: white;
@@ -230,91 +337,81 @@
       }
     }
 
+    @media (max-width: 600px) {
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #fff8f2, #fef2e8);
+        border-bottom: 2px solid #d4af37;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        padding: 12px;
+      }
 
-    /*------------------------------------------------------------------------------------*/
-    /* ---------- ENCABEZADO FIJO SOLO EN CELULARES ---------- */
-@media (max-width: 600px) {
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(90deg, #fff8f2, #fef2e8);
-    border-bottom: 2px solid #d4af37;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
-    padding: 12px;
-  }
+      body {
+        margin-top: 120px;
+      }
 
-  body {
-    margin-top: 120px;
-  }
+      header h1 {
+        font-size: 1.5em;
+      }
 
-  header h1 {
-    font-size: 1.5em;
-  }
+      header h2 {
+        font-size: 1em;
+        margin-bottom: 8px;
+      }
 
-  header h2 {
-    font-size: 1em;
-    margin-bottom: 8px;
-  }
-/*===============================================================================*/
-  .btn-carrito {
-  background-color: #ffffff; /* fondo blanco */
-  color: #b22222; /* carrito rojo */
-  border: 2px solid #fff;          /* borde blanco para destacarlo */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.4em;
-  cursor: pointer;
-  position: absolute;
-  top: 18px;
-  right: 25px;                     /* movido más a la izquierda */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-/*==============================*/
-.btn-carrito:hover {
-  transform: scale(1.08);
-  background-color: #ffffff;   /* mantiene el mismo color blanco */
-}
+      .btn-carrito {
+        background-color: #ffffff;
+        color: #b22222;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.4em;
+        cursor: pointer;
+        position: absolute;
+        top: 18px;
+        right: 25px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
 
-.btn-carrito:active,
-.btn-carrito:focus {
-  background-color: #ffffff;   /* evita que cambie al hacer clic o mantener presionado */
-  color: #b22222;
-  outline: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
+      .btn-carrito:hover {
+        transform: scale(1.08);
+        background-color: #ffffff;
+      }
 
-  /*==============================*/
-#contadorCarrito {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #27ae60;
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 0.8em;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid white;
-}
+      .btn-carrito:active,
+      .btn-carrito:focus {
+        background-color: #ffffff;
+        color: #b22222;
+        outline: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      }
 
-  /*===========================================================================================*/
-}
-
-
-    
-    /*-------------------------------------------------------------------------------------*/
+      #contadorCarrito {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #27ae60;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.8em;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid white;
+      }
+    }
   </style>
 </head>
 <body>
@@ -327,7 +424,7 @@
 
   <main>
     <div class="productos-container" id="productos"></div>
-    <p class="ayuda">💡 Consejo: Si eliges un producto por error, puedes hacer clic nuevamente en “✓ Elegido” para desmarcarlo.</p>
+    <p class="ayuda">💡 Consejo: Usa los botones + y - para ajustar las cantidades de cada producto.</p>
     <div id="resumen"></div>
   </main>
 
@@ -336,114 +433,125 @@
       {
         Producto: "Pie de árbol color rojo",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/csj9mr99n5g6hx9uj9qic/Pie-de-arbol-color-rojo.jpg?rlkey=fg5dl8o6zyznd0va6w2iv6tty&st=llj0bp60&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale un toque clásico y cálido a tu árbol con este hermoso pie rojo decorado con motivos navideños. Ideal para complementar tu decoración y cubrir la base con estilo."
       },
       {
         Producto: "Pie de árbol color verde",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/2zthpks4gv2u98ebxe7kj/Pie-de-arbol-color-verde.jpg?rlkey=7f0q4169c9ftevjzul5mo2s9i&st=qbferv2c&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Un diseño alegre con Santa, reno y muñeco de nieve que encantará a los más pequeños. Aporta color, ternura y diversión a tu rincón navideño."
       },
       {
         Producto: "Pie de arbol tipo cuadrille rojo",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/0ocf0buae5uwsxkfjso18/Pie-de-arbol-tipo-cuadrille-rojo.jpg?rlkey=7awyas7phefkx3w0h8vehaz9u&st=oa1h3zz2&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Inspirado en el tradicional estilo nórdico, combina tonos cálidos con figuras navideñas que evocan la magia y el encanto de la Navidad clásica."
       },
       {
         Producto: "patas largas color rosado",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/w81u566wkqq4om8f6n485/patas-largas-color-rosado.jpg?rlkey=me8kbo5rlytfzksewxnz9rz58&st=rmwbizfb&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
        {
         Producto: "patas largas color rojo",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/lwscfcw1cu36kd834vhu2/patas-largas-color-rojo.jpg?rlkey=b3vgxh2fck5cz2ywls3c0vsq5&st=ntf87oqe&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color rojo con bufanda",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/416nnqycxyzi78iyzqyl7/patas-largas-color-rojo-con-bufanda.jpg?rlkey=oes4v1a4xdu0n92mflrqqny8x&st=0v0rvixg&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color rojo con barba",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/icm5b0u64rsctzm71ukg9/patas-largas-color-rojo-con-barba.jpg?rlkey=z3t8zlw864493lyxzykbdgmtz&st=706coig9&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color blanco",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/6fbin1ewa42jqx52i6fg9/patas-largas-color-blanco.jpg?rlkey=0nvz06c6rvx1fqpiehsv798ik&st=ut8j4yqf&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color blanco con bufanda",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/fujhwsnaay3swpsioptv6/patas-largas-color-blanco-con-bufanda.jpg?rlkey=q2cyju4r5258izcmspro950z4&st=v8b0h55h&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
-    {
+      {
         Producto: "patas largas color beige",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/u3bs79l9smoy7ox67beyi/patas-largas-color-beige.jpg?rlkey=p2z4ncn5qlgia6yrzcrxv620l&st=ul4b2z1a&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color beige con bufanda",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/lwa9x0rcbsbeqoaw25vkm/patas-largas-color-beige-con-bufanda.jpg?rlkey=xlzhtrsnrupx78mavsyf5e0yh&st=rvlmqjxs&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color beige con barba",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/x1qqhv0bebmwqbbu5gh0e/patas-largas-color-beige-con-barba.jpg?rlkey=dvamyeo8d9b2394cqw89heb2z&st=lsc90zaa&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color azul con barba",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/ztn3r0v0gk7vdk1ysuo3t/patas-largas-color-azul-con-barba.jpg?rlkey=slr3szkl2s70e5g9larbrosue&st=4utuyf3j&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color  azul",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/1c8i25yxko0ljlrm894bt/patas-largas-color-azul.jpg?rlkey=5u6m97mozfmpn9pwej3m3rpe8&st=834kz4az&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
         Producto: "patas largas color  azul 2",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/g450sgsnjtjx4d1xwbgj3/patas-largas-color-azul-2.jpg?rlkey=qtbw86aea7i2g0ibwuumoav2d&st=zl6lhim6&dl=1",
-        Precio: "$5.000",
+        Precio: 5000,
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
     ];
 
-    let seleccionados = [];
+    // Objeto para guardar cantidades: {índice: cantidad}
+    let carrito = {};
     let descripcionVisible = [];
 
     function renderProductos() {
       const contenedor = document.getElementById("productos");
       contenedor.innerHTML = "";
       productos.forEach((p, i) => {
-        const elegido = seleccionados.includes(i);
+        const cantidad = carrito[i] || 0;
+        const enCarrito = cantidad > 0;
         const mostrarDescripcion = descripcionVisible.includes(i);
+        
         contenedor.innerHTML += `
           <div class="producto">
             <img src="${p.Imagen}" alt="${p.Producto}">
             <h3>${p.Producto}</h3>
-            <p class="precio">${p.Precio}</p>
+            <p class="precio">$${p.Precio.toLocaleString('es-CL')}</p>
             ${p.Descripcion ? `<button class="btn-ver" onclick="toggleDescripcion(${i})">${mostrarDescripcion ? "Cerrar Descripción" : "Ver Descripción"}</button>` : ""}
             ${mostrarDescripcion && p.Descripcion ? `<p class="descripcion">${p.Descripcion}</p>` : ""}
-            <button onclick="toggleProducto(${i})" class="btn-elegir ${elegido ? 'activo' : ''}">
-              ${elegido ? '✓ Elegido (clic para quitar)' : 'Elegir'}
-            </button>
+            
+            ${!enCarrito ? 
+              `<button onclick="agregarAlCarrito(${i})" class="btn-elegir">Elegir</button>` 
+              : 
+              `<div class="cantidad-controls">
+                <button onclick="disminuir(${i})" class="btn-cantidad">−</button>
+                <span class="cantidad-numero">${cantidad}</span>
+                <button onclick="aumentar(${i})" class="btn-cantidad">+</button>
+              </div>
+              <button onclick="quitarDelCarrito(${i})" class="btn-quitar">🗑️ Quitar del carrito</button>`
+            }
           </div>
         `;
       });
@@ -460,33 +568,93 @@
       mostrarResumen();
     }
 
-    function toggleProducto(i) {
-      const index = seleccionados.indexOf(i);
-      if (index === -1) {
-        seleccionados.push(i);
-      } else {
-        seleccionados.splice(index, 1);
-      }
+    function agregarAlCarrito(i) {
+      carrito[i] = 1;
       renderProductos();
       mostrarResumen();
-      actualizarContador(); // 👈 esta línea actualiza el número del carrito
+      actualizarContador();
+    }
+
+    function aumentar(i) {
+      if (carrito[i] < 99) { // Límite máximo de 99 unidades
+        carrito[i]++;
+        renderProductos();
+        mostrarResumen();
+        actualizarContador();
+      }
+    }
+
+    function disminuir(i) {
+      if (carrito[i] > 1) {
+        carrito[i]--;
+        renderProductos();
+        mostrarResumen();
+        actualizarContador();
+      }
+    }
+
+    function quitarDelCarrito(i) {
+      delete carrito[i];
+      renderProductos();
+      mostrarResumen();
+      actualizarContador();
+    }
+
+    function limpiarCarrito() {
+      if (confirm("¿Estás seguro de que quieres vaciar todo el carrito?")) {
+        carrito = {};
+        renderProductos();
+        mostrarResumen();
+        actualizarContador();
+      }
+    }
+
+    function calcularTotal() {
+      let total = 0;
+      for (let i in carrito) {
+        total += productos[i].Precio * carrito[i];
+      }
+      return total;
     }
 
     function mostrarResumen() {
       const resumen = document.getElementById("resumen");
-      if (seleccionados.length === 0) {
+      const items = Object.keys(carrito);
+      
+      if (items.length === 0) {
         resumen.innerHTML = "<p>No has seleccionado productos.</p>";
         return;
       }
-      let texto = "<h3>🛒 Productos seleccionados:</h3><ul style='list-style:none;padding:0'>";
-      seleccionados.forEach(i => {
-        texto += `<li>${productos[i].Producto} - ${productos[i].Precio}</li>`;
+
+      let texto = "<h3>🛒 Tu Carrito de Compras</h3>";
+      
+      items.forEach(i => {
+        const prod = productos[i];
+        const cant = carrito[i];
+        const subtotal = prod.Precio * cant;
+        
+        texto += `
+          <div class="resumen-item">
+            <span class="resumen-producto">${prod.Producto}</span>
+            <br>
+            <span class="resumen-cantidad">${cant}x $${prod.Precio.toLocaleString('es-CL')}</span>
+            <span class="resumen-subtotal">$${subtotal.toLocaleString('es-CL')}</span>
+          </div>
+        `;
       });
-      texto += `</ul>
+
+      const total = calcularTotal();
+      texto += `
+        <div class="total-final">
+          TOTAL: $${total.toLocaleString('es-CL')}
+        </div>
         <p>Por favor ingresa tu nombre para continuar:</p>
         <input id='nombreCliente' type='text' class='nombre-input' placeholder='Tu nombre aquí'>
-        <br><br>
-        <button onclick='enviarWhatsApp()' class='btn-whatsapp'>Enviar pedido por WhatsApp</button>`;
+        <br>
+        <button onclick='enviarWhatsApp()' class='btn-whatsapp'>📱 Enviar pedido por WhatsApp</button>
+        <button onclick='limpiarCarrito()' class='btn-whatsapp btn-limpiar'>🗑️ Vaciar carrito</button>
+      `;
+      
       resumen.innerHTML = texto;
     }
 
@@ -496,53 +664,35 @@
         alert("Por favor, ingresa tu nombre para continuar.");
         return;
       }
+      
       let mensaje = `Hola, soy ${nombre}. Me gustaría comprar:\n\n`;
-      seleccionados.forEach(i => {
-        mensaje += `- ${productos[i].Producto} (${productos[i].Precio})\n`;
-      });
+      
+      for (let i in carrito) {
+        const prod = productos[i];
+        const cant = carrito[i];
+        const subtotal = prod.Precio * cant;
+        mensaje += `• ${cant}x ${prod.Producto} = $${subtotal.toLocaleString('es-CL')}\n`;
+      }
+      
+      const total = calcularTotal();
+      mensaje += `\n💰 TOTAL: $${total.toLocaleString('es-CL')}`;
+      
       const url = "https://wa.me/56973500652?text=" + encodeURIComponent(mensaje);
       window.open(url, "_blank");
     }
 
+    function irAlResumen() {
+      const resumen = document.getElementById("resumen");
+      resumen.scrollIntoView({ behavior: "smooth" });
+    }
 
-/*---------------------------------------------------------------------------------------------------------*/
-function irAlResumen() {
-  const resumen = document.getElementById("resumen");
-  resumen.scrollIntoView({ behavior: "smooth" });
-}
+    function actualizarContador() {
+      const contador = document.getElementById("contadorCarrito");
+      const totalItems = Object.values(carrito).reduce((sum, cant) => sum + cant, 0);
+      if (contador) contador.textContent = totalItems;
+    }
 
-function actualizarContador() {
-  const contador = document.getElementById("contadorCarrito");
-  if (contador) contador.textContent = seleccionados.length;
-}
-
-
-    
-/*----------------------------------------------------------------------------------------------------------*/    
-    
-
-    
     window.onload = renderProductos;
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
