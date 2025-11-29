@@ -1,117 +1,943 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catálogo de Productos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎁 El Rincón de la Tati – Catálogo</title>
 
-  <!-- Estilos originales -->
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+      background-color: #FFEDE3;
+      color: #5A1E1E;
       margin: 0;
       padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #FFEDE3;
+      padding: 20px 10px 10px 10px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h1 {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
+      font-size: 2em;
+      color: #B22222;
       margin: 0;
     }
 
-    .contenedor-productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    h2 {
+      font-weight: normal;
+      color: #8B0000;
+      margin: 5px 0 0 0;
+      font-size: 1.1em;
+    }
+
+    .categorias-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 10px;
+      background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
+      border-top: 2px solid #d4af37;
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    body {
+      padding-top: 200px;
+    }
+
+    .btn-categoria {
+      background: white;
+      color: #5A1E1E;
+      border: 3px solid #d4af37;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-categoria:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      background-color: #fff8f2;
+    }
+
+    .btn-categoria.activo {
+      background: linear-gradient(135deg, #B22222 0%, #8B0000 100%);
+      color: white;
+      border-color: #8B0000;
+    }
+
+    .btn-promociones {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+      color: #B22222 !important;
+      border: 3px solid #FF6B00 !important;
+      font-size: 1.1em !important;
+      animation: pulsarPromo 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6) !important;
+    }
+
+    .btn-promociones:hover {
+      transform: translateY(-5px) scale(1.05) !important;
+      box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5) !important;
+    }
+
+    .btn-promociones.activo {
+      background: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%) !important;
+      color: white !important;
+      border-color: #FF0000 !important;
+      animation: none;
+    }
+
+    @keyframes pulsarPromo {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+      }
+    }
+
+    .btn-categoria .emoji {
+      font-size: 1.3em;
+      margin-right: 5px;
+    }
+
+    .categoria-info {
+      background: white;
+      padding: 15px;
+      margin: 20px 20px;
+      border-radius: 10px;
+      border-left: 5px solid #d4af37;
+      color: #5A1E1E;
+      font-size: 1.1em;
+    }
+
+    .mensaje-proximamente {
+      background: linear-gradient(135deg, #fff8f2 0%, #ffe8d6 100%);
+      border: 3px dashed #d4af37;
+      border-radius: 15px;
+      padding: 50px 30px;
+      margin: 40px auto;
+      max-width: 600px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      animation: pulsar 2s ease-in-out infinite;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .mensaje-proximamente .icono {
+      font-size: 4em;
+      margin-bottom: 20px;
+      animation: girar 3s linear infinite;
+    }
+
+    @keyframes girar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .mensaje-proximamente h3 {
+      color: #B22222;
+      font-size: 1.8em;
+      margin: 20px 0;
+    }
+
+    .mensaje-proximamente p {
+      color: #5A1E1E;
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    .mensaje-proximamente .destacado {
+      background: #d4af37;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+
+    .productos-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
       padding: 20px;
-      max-width: 1200px;
-      margin: auto;
     }
 
     .producto {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      text-align: center;
+     background-color: #fffaf5;
+     border: 3px solid #d4af37;
+     border-radius: 15px;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+     padding: 10px;
+     overflow: hidden;
+     transition: transform 0.2s ease-in-out;
+    }
+
+    .producto:hover {
+      transform: scale(1.02);
     }
 
     .producto img {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
+      height: 250px;                     
+      object-fit: contain;              
       border-radius: 10px;
-    }
-
-    .producto h3 {
-      margin: 10px 0 5px;
-    }
-
-    .producto p {
-      color: #555;
-      font-size: 14px;
-      min-height: 40px;
-    }
+      background-color: #fff;
+     }
 
     .precio {
-      margin-top: 10px;
-      font-size: 18px;
       font-weight: bold;
-      color: #009688;
+      color: #B22222;
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .btn-elegir {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-elegir:hover {
+      background-color: #c0392b;
+    }
+
+    .cantidad-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      animation: aparecer 0.3s ease;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .btn-cantidad {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .btn-cantidad:hover {
+      background-color: #229954;
+      transform: scale(1.1);
+    }
+
+    .btn-cantidad:active {
+      transform: scale(0.95);
+    }
+
+    .cantidad-numero {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #27ae60;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .btn-quitar {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: 0.3s;
+      margin-top: 8px;
+    }
+
+    .btn-quitar:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-ver {
+      background-color: #d35400;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      font-size: 0.9em;
+    }
+
+    .btn-ver:hover {
+      background-color: #b84300;
+    }
+
+    .descripcion {
+      font-size: 0.9em;
+      color: #444;
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 10px;
+      line-height: 1.4;
+      text-align: justify;
+    }
+
+    .ayuda {
+      font-size: 0.85em;
+      color: #777;
+      margin-top: 6px;
+    }
+
+   #resumen {
+      background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
+      border: 2px solid #d4af37;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      padding: 25px;
+      max-width: 600px;
+      margin: 30px auto;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    #resumen:hover {
+      transform: scale(1.02);
+    }
+
+    #resumen h3 {
+      font-size: 1.5em;
+      color: #b22222;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #d4af37;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    #resumen p {
+      font-size: 1.1em;
+      color: #333;
+      margin: 8px 0;
+    }
+
+    .resumen-item {
+      background: white;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 4px solid #d4af37;
+      text-align: left;
+    }
+
+    .resumen-producto {
+      font-weight: bold;
+      color: #5A1E1E;
+    }
+
+    .resumen-cantidad {
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    .resumen-subtotal {
+      color: #B22222;
+      font-weight: bold;
+      float: right;
+    }
+
+    .total-final {
+      background: #d4af37;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    #resumen input {
+      width: 85%;
+      padding: 12px;
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      font-size: 1em;
+      margin-top: 15px;
+      outline: none;
+      text-align: center;
+    }
+
+    #resumen input:focus {
+      border-color: #b22222;
+      box-shadow: 0 0 8px rgba(178, 34, 34, 0.3);
+    }
+
+    #resumen button {
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #resumen button:hover {
+      background-color: #1ebe57;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .btn-limpiar {
+      background-color: #e67e22 !important;
+      margin-left: 10px;
+    }
+
+    .btn-limpiar:hover {
+      background-color: #d35400 !important;
+    }
+
+    .btn-carrito-fijo {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ffffff;
+      color: #000000;
+      border: 3px solid #d4af37;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.8em;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .btn-carrito-fijo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(178, 34, 34, 0.6);
+    }
+
+    #contadorCarritoFijo {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #FFD700;
+      color: #B22222;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      font-size: 0.5em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.4em;
+      }
+
+      h2 {
+        font-size: 0.9em;
+      }
+
+      .categorias-container {
+        top: 80px;
+        padding: 10px 5px;
+        gap: 8px;
+      }
+
+      body {
+        padding-top: 180px;
+      }
+
+      .btn-categoria {
+        font-size: 0.85em;
+        padding: 10px 12px;
+      }
+
+      .btn-promociones {
+        font-size: 0.95em !important;
+      }
+
+      .producto {
+        width: 90%;
+      }
+
+      .producto img {
+        height: auto;
+        padding: 8px;
+      }
+
+      .mensaje-proximamente {
+        padding: 30px 20px;
+        margin: 20px 15px;
+      }
+
+      .mensaje-proximamente h3 {
+        font-size: 1.4em;
+      }
+
+      .mensaje-proximamente p {
+        font-size: 1em;
+      }
+
+      .btn-carrito-fijo {
+        width: 55px;
+        height: 55px;
+        font-size: 1.5em;
+        bottom: 15px;
+        right: 15px;
+      }
     }
   </style>
-
-  <!-- Supabase CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <h1>Catálogo de Productos</h1>
+  <header>
+   <h1>🎁 El Rincón de la Tati</h1>
+   <h2>Catálogo de Productos</h2>
+  </header>
 
-  <div class="contenedor-productos" id="listaProductos"></div>
+  <div class="categorias-container">
+    <button class="btn-categoria activo" onclick="filtrarCategoria('todas')" id="btn-todas">
+      <span class="emoji">📦</span> Ver Todo
+    </button>
+    <button class="btn-categoria btn-promociones" onclick="filtrarCategoria('promociones')" id="btn-promociones">
+      <span class="emoji">🔥</span> PROMOCIONES
+    </button>
+    <button class="btn-categoria" onclick="filtrarCategoria('navidad')" id="btn-navidad">
+      <span class="emoji">🎄</span> Navidad
+    </button>
+    <button class="btn-categoria" onclick="filtrarCategoria('tejido')" id="btn-tejido">
+      <span class="emoji">🧶</span> Tejido
+    </button>
+    <button class="btn-categoria" onclick="filtrarCategoria('hogar')" id="btn-hogar">
+      <span class="emoji">🏠</span> Hogar
+    </button>
+    <button class="btn-categoria" onclick="filtrarCategoria('ninos')" id="btn-ninos">
+      <span class="emoji">👶</span> Niños
+    </button>
+    <button class="btn-categoria" onclick="filtrarCategoria('mujer')" id="btn-mujer">
+      <span class="emoji">👗</span> Mujer
+    </button>
+  </div>
+
+  <button class="btn-carrito-fijo" onclick="irAlResumen()">
+    🛒
+    <span id="contadorCarritoFijo">0</span>
+  </button>
+
+  <div class="categoria-info" id="categoriaInfo"></div>
+
+  <main>
+    <div id="mensajeProximamente" style="display: none;"></div>
+    <div class="productos-container" id="productos"></div>
+    <p class="ayuda" id="ayudaTexto">💡 Consejo: Usa los botones + y - para ajustar las cantidades de cada producto.</p>
+    <div id="resumen"></div>
+  </main>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
 
   <script>
-    // 🔗 Datos de tu proyecto
-    const supabaseUrl = "https://wazkoegfeuttutfoqfjt.supabase.co";
-    const supabaseKey = "sb_publishable_PwMGk7yJAN-1q_a_meHcKQ_CuWSSrgF";
-    const supabase = supabasejs.createClient(supabaseUrl, supabaseKey);
+    // 🔗 Configuración Supabase
+    const SUPABASE_URL = "https://wazkoegfeuttutfoqfjt.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_PwMGk7yJAN-1q_a_meHcKQ_CuWSSrgF";
 
-    // 📌 Cargar productos desde Supabase
-    async function cargarProductos() {
-      const { data, error } = await supabase
-        .from("productos")
-        .select("*")
-        .order("nombre", { ascending: true });
+    const { createClient } = supabase;
+    const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      if (error) {
-        console.error("Error cargando productos:", error);
+    // 👉 Antes el arreglo estaba lleno; ahora lo llenamos desde Supabase
+    let productos = [];
+
+    let categoriaActual = 'todas';
+    let carrito = {};
+    let descripcionVisible = [];
+
+    const categoriasInfo = {
+      todas: { nombre: "Todos los Productos", emoji: "📦" },
+      promociones: { nombre: "Promociones", emoji: "🔥" },
+      navidad: { nombre: "Navidad", emoji: "🎄" },
+      tejido: { nombre: "Tejido", emoji: "🧶" },
+      hogar: { nombre: "Hogar", emoji: "🏠" },
+      ninos: { nombre: "Niños", emoji: "👶" },
+      mujer: { nombre: "Mujer", emoji: "👗" }
+    };
+
+    // 🟢 Cargar productos desde Supabase y mapear a tu formato
+    async function cargarProductosDesdeSupabase() {
+      try {
+        const { data, error } = await supabaseClient
+          .from("productos")
+          .select("*")
+          .order("categoria", { ascending: true });
+
+        if (error) {
+          console.error("Error al cargar productos desde Supabase:", error);
+          document.getElementById("productos").innerHTML =
+            "<p>Hubo un problema al cargar los productos. Intenta recargar la página.</p>";
+          return;
+        }
+
+        // Adaptar las columnas de Supabase al formato que usa tu catálogo
+        productos = (data || []).map((row) => ({
+          Producto: row.nombre,
+          Imagen: row.imagen_url || row.imagenUrl, // por si cambias el nombre
+          Precio: row.precio,
+          Categoria: row.categoria,
+          Agotado: row.agotado,
+          Descripcion: row.descripcion
+        }));
+
+        renderProductos();
+        actualizarInfoCategoria();
+      } catch (e) {
+        console.error("Error inesperado:", e);
+      }
+    }
+
+    function filtrarCategoria(categoria) {
+      categoriaActual = categoria;
+      
+      document.querySelectorAll('.btn-categoria').forEach(btn => {
+        btn.classList.remove('activo');
+      });
+      document.getElementById('btn-' + categoria).classList.add('activo');
+      
+      renderProductos();
+      actualizarInfoCategoria();
+    }
+
+    function actualizarInfoCategoria() {
+      const productosFiltrados = obtenerProductosFiltrados();
+      const info = categoriasInfo[categoriaActual];
+      const infoEl = document.getElementById('categoriaInfo');
+      
+      if (!info) {
+        infoEl.style.display = 'none';
         return;
       }
 
-      const contenedor = document.getElementById("listaProductos");
+      if (productosFiltrados.length > 0) {
+        infoEl.innerHTML = `${info.emoji} <strong>${info.nombre}</strong> - ${productosFiltrados.length} producto${productosFiltrados.length !== 1 ? 's' : ''} disponible${productosFiltrados.length !== 1 ? 's' : ''}`;
+        infoEl.style.display = 'block';
+      } else {
+        infoEl.style.display = 'none';
+      }
+    }
+
+    function obtenerProductosFiltrados() {
+      if (categoriaActual === 'todas') {
+        return productos;
+      }
+      return productos.filter(p => p.Categoria === categoriaActual);
+    }
+
+    function mostrarMensajeProximamente() {
+      const info = categoriasInfo[categoriaActual];
+      const mensajes = {
+        promociones: {
+          icono: "🔥",
+          titulo: "¡Ofertas Increíbles!",
+          texto: "Estamos preparando las mejores promociones y descuentos especiales para ti.",
+          extra: "Descuentos de hasta 50% en productos seleccionados"
+        },
+        tejido: {
+          icono: "🧶",
+          titulo: "Tejidos Artesanales",
+          texto: "Estamos preparando hermosos productos tejidos a mano con mucho cariño.",
+          extra: "Gorros, bufandas, mantas y más..."
+        },
+        hogar: {
+          icono: "🏠",
+          titulo: "Decoración para el Hogar",
+          texto: "Pronto encontrarás productos únicos para embellecer cada rincón de tu casa.",
+          extra: "¡Grandes sorpresas en camino!"
+        },
+        ninos: {
+          icono: "👶",
+          titulo: "Productos para Niños",
+          texto: "Estamos seleccionando los mejores productos para los más pequeños del hogar.",
+          extra: "Juguetes, ropa y accesorios especiales"
+        },
+        mujer: {
+          icono: "👗",
+          titulo: "Moda y Accesorios para Mujer",
+          texto: "Preparando una colección exclusiva pensada especialmente para ti.",
+          extra: "Accesorios, joyería y más..."
+        }
+      };
+
+      const msg = mensajes[categoriaActual];
+      
+      return `
+        <div class="mensaje-proximamente">
+          <div class="icono">${msg.icono}</div>
+          <h3>${msg.titulo}</h3>
+          <p>${msg.texto}</p>
+          <p style="font-size: 1em; color: #666; margin: 20px 0;">
+            ${msg.extra}
+          </p>
+          <div class="destacado">
+            ⏳ Estamos trabajando para tenerlo listo muy pronto
+          </div>
+          <p style="margin-top: 25px; font-size: 0.95em; color: #888;">
+            💡 Mientras tanto, explora nuestras otras categorías disponibles
+          </p>
+        </div>
+      `;
+    }
+
+    function renderProductos() {
+      const contenedor = document.getElementById("productos");
+      const mensajeEl = document.getElementById("mensajeProximamente");
+      const ayudaEl = document.getElementById("ayudaTexto");
+      const productosFiltrados = obtenerProductosFiltrados();
+      
+      if (!productos || productos.length === 0) {
+        contenedor.innerHTML = "<p>Cargando productos...</p>";
+        ayudaEl.style.display = 'none';
+        mensajeEl.style.display = 'none';
+        return;
+      }
+
+      if (productosFiltrados.length === 0) {
+        contenedor.innerHTML = '';
+        mensajeEl.innerHTML = mostrarMensajeProximamente();
+        mensajeEl.style.display = 'block';
+        ayudaEl.style.display = 'none';
+        return;
+      }
+      
+      mensajeEl.style.display = 'none';
+      ayudaEl.style.display = 'block';
       contenedor.innerHTML = "";
+      
+      productosFiltrados.forEach((p, i) => {
+        const cantidad = carrito[i] || 0;
+        const enCarrito = cantidad > 0;
+        const mostrarDescripcion = descripcionVisible.includes(i);
+        
+        contenedor.innerHTML += `
+          <div class="producto">
+            <img src="${p.Imagen}" alt="${p.Producto}">
+            <h3>${p.Producto}</h3>
+            <p class="precio">${p.Precio.toLocaleString('es-CL')}</p>
+            ${p.Descripcion ? `<button class="btn-ver" onclick="toggleDescripcion(${i})">${mostrarDescripcion ? "Cerrar Descripción" : "Ver Descripción"}</button>` : ""}
+            ${mostrarDescripcion && p.Descripcion ? `<p class="descripcion">${p.Descripcion}</p>` : ""}
 
-      data.forEach(producto => {
-        const item = document.createElement("div");
-        item.className = "producto";
-
-        item.innerHTML = `
-          <img src="${producto.imagenUrl}" alt="${producto.nombre}">
-          <h3>${producto.nombre}</h3>
-          <p>${producto.descripcion}</p>
-          <div class="precio">$${producto.precio}</div>
+          ${p.Agotado ? 
+           '<p style="color: #ffffff; font-weight: bold; font-size: 1.1em; margin: 10px 0; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); padding: 12px; border-radius: 10px; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); text-transform: uppercase; letter-spacing: 1px; border: 2px solid #c0392b;">⚠️ PRODUCTO AGOTADO</p>'
+           :   
+           
+           !enCarrito ? 
+             
+              `<button onclick="agregarAlCarrito(${i})" class="btn-elegir">Elegir</button>` 
+              : 
+              `<div class="cantidad-controls">
+                <button onclick="disminuir(${i})" class="btn-cantidad">−</button>
+                <span class="cantidad-numero">${cantidad}</span>
+                <button onclick="aumentar(${i})" class="btn-cantidad">+</button>
+              </div>
+              <button onclick="quitarDelCarrito(${i})" class="btn-quitar">🗑️ Quitar del carrito</button>`
+            }
+          </div>
         `;
-
-        contenedor.appendChild(item);
       });
     }
 
-    // ▶️ Llamar a la función
-    cargarProductos();
-  </script>
+    function toggleDescripcion(i) {
+      const index = descripcionVisible.indexOf(i);
+      if (index === -1) {
+        descripcionVisible.push(i);
+      } else {
+        descripcionVisible.splice(index, 1);
+      }
+      renderProductos();
+    }
 
+    function agregarAlCarrito(i) {
+      carrito[i] = 1;
+      renderProductos();
+      mostrarResumen();
+      actualizarContador();
+    }
+
+    function aumentar(i) {
+      if (carrito[i] < 99) {
+        carrito[i]++;
+        renderProductos();
+        mostrarResumen();
+        actualizarContador();
+      }
+    }
+
+    function disminuir(i) {
+      if (carrito[i] > 1) {
+        carrito[i]--;
+        renderProductos();
+        mostrarResumen();
+        actualizarContador();
+      }
+    }
+
+    function quitarDelCarrito(i) {
+      delete carrito[i];
+      renderProductos();
+      mostrarResumen();
+      actualizarContador();
+    }
+
+    function limpiarCarrito() {
+      if (confirm("¿Estás seguro de que quieres vaciar todo el carrito?")) {
+        carrito = {};
+        renderProductos();
+        mostrarResumen();
+        actualizarContador();
+      }
+    }
+
+    function calcularTotal() {
+      let total = 0;
+      for (let i in carrito) {
+        if (!productos[i]) continue;
+        total += productos[i].Precio * carrito[i];
+      }
+      return total;
+    }
+
+    function mostrarResumen() {
+      const resumen = document.getElementById("resumen");
+      const items = Object.keys(carrito);
+      
+      if (items.length === 0) {
+        resumen.innerHTML = "<p>No has seleccionado productos.</p>";
+        return;
+      }
+
+      let texto = "<h3>🛒 Tu Carrito de Compras</h3>";
+      
+      items.forEach(i => {
+        const prod = productos[i];
+        if (!prod) return;
+        const cant = carrito[i];
+        const subtotal = prod.Precio * cant;
+        
+        texto += `
+          <div class="resumen-item">
+            <span class="resumen-producto">${prod.Producto}</span>
+            <br>
+            <span class="resumen-cantidad">${cant}x ${prod.Precio.toLocaleString('es-CL')}</span>
+            <span class="resumen-subtotal">${subtotal.toLocaleString('es-CL')}</span>
+          </div>
+        `;
+      });
+
+      const total = calcularTotal();
+      texto += `
+        <div class="total-final">
+          TOTAL: ${total.toLocaleString('es-CL')}
+        </div>
+        <p>Por favor ingresa tu nombre para continuar:</p>
+        <input id='nombreCliente' type='text' class='nombre-input' placeholder='Tu nombre aquí'>
+        <br>
+        <button onclick='enviarWhatsApp()' class='btn-whatsapp'>📱 Enviar pedido por WhatsApp</button>
+        <button onclick='limpiarCarrito()' class='btn-whatsapp btn-limpiar'>🗑️ Vaciar carrito</button>
+      `;
+      
+      resumen.innerHTML = texto;
+    }
+
+    function enviarWhatsApp() {
+      const nombre = document.getElementById("nombreCliente").value.trim();
+      if (!nombre) {
+        alert("Por favor, ingresa tu nombre para continuar.");
+        return;
+      }
+      
+      let mensaje = `Hola, soy ${nombre}. Me gustaría comprar:\n\n`;
+      
+      for (let i in carrito) {
+        const prod = productos[i];
+        if (!prod) continue;
+        const cant = carrito[i];
+        const subtotal = prod.Precio * cant;
+        mensaje += `• ${cant}x ${prod.Producto} = ${subtotal.toLocaleString('es-CL')}\n`;
+      }
+      
+      const total = calcularTotal();
+      mensaje += `\n💰 TOTAL: ${total.toLocaleString('es-CL')}`;
+      
+      const url = "https://wa.me/56973500652?text=" + encodeURIComponent(mensaje);
+      window.open(url, "_blank");
+    }
+
+    function irAlResumen() {
+      const resumen = document.getElementById("resumen");
+      resumen.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function actualizarContador() {
+      const contador = document.getElementById("contadorCarritoFijo");
+      const totalItems = Object.values(carrito).reduce((sum, cant) => sum + cant, 0);
+      if (contador) contador.textContent = totalItems;
+    }
+
+    // 🚀 Al cargar la página, obtenemos los productos desde Supabase
+    window.onload = function() {
+      cargarProductosDesdeSupabase();
+    };
+  </script>
 </body>
 </html>
