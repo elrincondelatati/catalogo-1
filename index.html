@@ -1,1004 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎁 El Rincón de la Tati – Catálogo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo | El Rincón de la Tati</title>
 
-  <style>
+<style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #FFEDE3;
-      color: #5A1E1E;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      background-color: #FFEDE3;
-      padding: 20px 10px 10px 10px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      font-size: 2em;
-      color: #B22222;
-      margin: 0;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: white;
     }
 
     h2 {
-      font-weight: normal;
-      color: #8B0000;
-      margin: 5px 0 0 0;
-      font-size: 1.1em;
+        margin: 20px;
+        margin-bottom: 10px;
     }
 
-    /* CONTADOR DE VISITAS */
-    .contador-visitas {
-      background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-      color: #5A1E1E;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 0.9em;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 8px;
-      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
-      animation: brillar 2s ease-in-out infinite;
-    }
-
-    @keyframes brillar {
-      0%, 100% { box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4); }
-      50% { box-shadow: 0 3px 15px rgba(212, 175, 55, 0.7); }
-    }
-
-    .contador-visitas .numero {
-      font-size: 1.2em;
-      color: #B22222;
-      margin: 0 5px;
-    }
-
-    .categorias-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 10px;
-      background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
-      border-top: 2px solid #d4af37;
-      position: fixed;
-      top: 130px;
-      left: 0;
-      width: 100%;
-      z-index: 999;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    body {
-      padding-top: 230px;
-    }
-
-    .btn-categoria {
-      background: white;
-      color: #5A1E1E;
-      border: 3px solid #d4af37;
-      padding: 12px 20px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-
-    .btn-categoria:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      background-color: #fff8f2;
-    }
-
-    .btn-categoria.activo {
-      background: linear-gradient(135deg, #B22222 0%, #8B0000 100%);
-      color: white;
-      border-color: #8B0000;
-    }
-
-    .btn-promociones {
-      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-      color: #B22222 !important;
-      border: 3px solid #FF6B00 !important;
-      font-size: 1.1em !important;
-      animation: pulsarPromo 2s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6) !important;
-    }
-
-    .btn-promociones:hover {
-      transform: translateY(-5px) scale(1.05) !important;
-      box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5) !important;
-    }
-
-    .btn-promociones.activo {
-      background: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%) !important;
-      color: white !important;
-      border-color: #FF0000 !important;
-      animation: none;
-    }
-
-    @keyframes pulsarPromo {
-      0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-      }
-      50% { 
-        transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
-      }
-    }
-
-    .btn-categoria .emoji {
-      font-size: 1.3em;
-      margin-right: 5px;
-    }
-
-    .categoria-info {
-      background: white;
-      padding: 15px;
-      margin: 20px 20px;
-      border-radius: 10px;
-      border-left: 5px solid #d4af37;
-      color: #5A1E1E;
-      font-size: 1.1em;
-    }
-
-    .mensaje-proximamente {
-      background: linear-gradient(135deg, #fff8f2 0%, #ffe8d6 100%);
-      border: 3px dashed #d4af37;
-      border-radius: 15px;
-      padding: 50px 30px;
-      margin: 40px auto;
-      max-width: 600px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      animation: pulsar 2s ease-in-out infinite;
-    }
-
-    @keyframes pulsar {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-
-    .mensaje-proximamente .icono {
-      font-size: 4em;
-      margin-bottom: 20px;
-      animation: girar 3s linear infinite;
-    }
-
-    @keyframes girar {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .mensaje-proximamente h3 {
-      color: #B22222;
-      font-size: 1.8em;
-      margin: 20px 0;
-    }
-
-    .mensaje-proximamente p {
-      color: #5A1E1E;
-      font-size: 1.2em;
-      line-height: 1.6;
-      margin: 15px 0;
-    }
-
-    .mensaje-proximamente .destacado {
-      background: #d4af37;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 10px;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 1.1em;
-    }
-
-    .productos-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
+    .categoria {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 20px;
     }
 
     .producto {
-     background-color: #fffaf5;
-     border: 3px solid #d4af37;
-     border-radius: 15px;
-     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-     padding: 10px;
-     overflow: hidden;
-     transition: transform 0.2s ease-in-out;
-    }
-
-    .producto:hover {
-      transform: scale(1.02);
+        display: inline-block;
+        width: 180px;
+        background: #f6f6f6;
+        border-radius: 10px;
+        margin-right: 20px;
+        padding: 10px;
+        vertical-align: top;
+        white-space: normal;
+        box-shadow: 0 0 4px rgba(0,0,0,0.1);
     }
 
     .producto img {
-      width: 100%;
-      height: 250px;                     
-      object-fit: contain;              
-      border-radius: 10px;
-      background-color: #fff;
-     }
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .agotado {
+        color: red;
+        font-weight: bold;
+        margin-top: 5px;
+        display: block;
+    }
 
     .precio {
-      font-weight: bold;
-      color: #B22222;
-      font-size: 1.2em;
-      margin: 10px 0;
+        font-size: 18px;
+        font-weight: bold;
     }
-
-    .btn-elegir {
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn-elegir:hover {
-      background-color: #c0392b;
-    }
-
-    .cantidad-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-      animation: aparecer 0.3s ease;
-    }
-
-    @keyframes aparecer {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .btn-cantidad {
-      background-color: #27ae60;
-      color: white;
-      border: none;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      font-size: 1.3em;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    .btn-cantidad:hover {
-      background-color: #229954;
-      transform: scale(1.1);
-    }
-
-    .btn-cantidad:active {
-      transform: scale(0.95);
-    }
-
-    .cantidad-numero {
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #27ae60;
-      min-width: 30px;
-      text-align: center;
-    }
-
-    .btn-quitar {
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.9em;
-      transition: 0.3s;
-      margin-top: 8px;
-    }
-
-    .btn-quitar:hover {
-      background-color: #c0392b;
-    }
-
-    .btn-ver {
-      background-color: #d35400;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-bottom: 5px;
-      font-size: 0.9em;
-    }
-
-    .btn-ver:hover {
-      background-color: #b84300;
-    }
-
-    .descripcion {
-      font-size: 0.9em;
-      color: #444;
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 8px;
-      margin-top: 10px;
-      line-height: 1.4;
-      text-align: justify;
-    }
-
-    .ayuda {
-      font-size: 0.85em;
-      color: #777;
-      margin-top: 6px;
-    }
-
-   #resumen {
-      background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
-      border: 2px solid #d4af37;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-      padding: 25px;
-      max-width: 600px;
-      margin: 30px auto;
-      text-align: center;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    #resumen:hover {
-      transform: scale(1.02);
-    }
-
-    #resumen h3 {
-      font-size: 1.5em;
-      color: #b22222;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #d4af37;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-
-    #resumen p {
-      font-size: 1.1em;
-      color: #333;
-      margin: 8px 0;
-    }
-
-    .resumen-item {
-      background: white;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border-left: 4px solid #d4af37;
-      text-align: left;
-    }
-
-    .resumen-producto {
-      font-weight: bold;
-      color: #5A1E1E;
-    }
-
-    .resumen-cantidad {
-      color: #27ae60;
-      font-weight: bold;
-    }
-
-    .resumen-subtotal {
-      color: #B22222;
-      font-weight: bold;
-      float: right;
-    }
-
-    .total-final {
-      background: #d4af37;
-      color: white;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 1.3em;
-      font-weight: bold;
-      margin-top: 15px;
-    }
-
-    #resumen input {
-      width: 85%;
-      padding: 12px;
-      border: 2px solid #d4af37;
-      border-radius: 10px;
-      font-size: 1em;
-      margin-top: 15px;
-      outline: none;
-      text-align: center;
-    }
-
-    #resumen input:focus {
-      border-color: #b22222;
-      box-shadow: 0 0 8px rgba(178, 34, 34, 0.3);
-    }
-
-    #resumen button {
-      background-color: #25d366;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 20px;
-      font-size: 1.1em;
-      margin-top: 15px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    #resumen button:hover {
-      background-color: #1ebe57;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .btn-limpiar {
-      background-color: #e67e22 !important;
-      margin-left: 10px;
-    }
-
-    .btn-limpiar:hover {
-      background-color: #d35400 !important;
-    }
-
-    .btn-carrito-fijo {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #ffffff;
-      color: #000000;
-      border: 3px solid #d4af37;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 1.8em;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 1001;
-    }
-
-    .btn-carrito-fijo:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 25px rgba(178, 34, 34, 0.6);
-    }
-
-    #contadorCarritoFijo {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background-color: #FFD700;
-      color: #B22222;
-      border-radius: 50%;
-      width: 25px;
-      height: 25px;
-      font-size: 0.5em;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid white;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 1.4em;
-      }
-
-      h2 {
-        font-size: 0.9em;
-      }
-
-      .contador-visitas {
-        font-size: 0.8em;
-        padding: 6px 12px;
-      }
-
-      .categorias-container {
-        top: 110px;
-        padding: 10px 5px;
-        gap: 8px;
-      }
-
-      body {
-        padding-top: 210px;
-      }
-
-      .btn-categoria {
-        font-size: 0.85em;
-        padding: 10px 12px;
-      }
-
-      .btn-promociones {
-        font-size: 0.95em !important;
-      }
-
-      .producto {
-        width: 90%;
-      }
-
-      .producto img {
-        height: auto;
-        padding: 8px;
-      }
-
-      .mensaje-proximamente {
-        padding: 30px 20px;
-        margin: 20px 15px;
-      }
-
-      .mensaje-proximamente h3 {
-        font-size: 1.4em;
-      }
-
-      .mensaje-proximamente p {
-        font-size: 1em;
-      }
-
-      .btn-carrito-fijo {
-        width: 55px;
-        height: 55px;
-        font-size: 1.5em;
-        bottom: 15px;
-        right: 15px;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <header>
-   <h1>🎁 El Rincón de la Tati</h1>
-   <h2>Catálogo de Productos</h2>
-   <div class="contador-visitas">
-     👥 Visitas: <span class="numero" id="contadorVisitas">0</span>
-   </div>
-  </header>
+<h1 style="text-align:center; padding:20px;">Catálogo de Productos</h1>
 
-  <div class="categorias-container">
-    <button class="btn-categoria activo" onclick="filtrarCategoria('todas')" id="btn-todas">
-      <span class="emoji">📦</span> Ver Todo
-    </button>
-    <button class="btn-categoria btn-promociones" onclick="filtrarCategoria('promociones')" id="btn-promociones">
-      <span class="emoji">🔥</span> PROMOCIONES
-    </button>
-    <button class="btn-categoria" onclick="filtrarCategoria('navidad')" id="btn-navidad">
-      <span class="emoji">🎄</span> Navidad
-    </button>
-    <button class="btn-categoria" onclick="filtrarCategoria('tejido')" id="btn-tejido">
-      <span class="emoji">🧶</span> Tejido
-    </button>
-    <button class="btn-categoria" onclick="filtrarCategoria('hogar')" id="btn-hogar">
-      <span class="emoji">🏠</span> Hogar
-    </button>
-    <button class="btn-categoria" onclick="filtrarCategoria('ninos')" id="btn-ninos">
-      <span class="emoji">👶</span> Niños
-    </button>
-    <button class="btn-categoria" onclick="filtrarCategoria('mujer')" id="btn-mujer">
-      <span class="emoji">👗</span> Mujer
-    </button>
-  </div>
+<div id="contenedor-categorias"></div>
 
-  <button class="btn-carrito-fijo" onclick="irAlResumen()">
-    🛒
-    <span id="contadorCarritoFijo">0</span>
-  </button>
+<!-- SUPABASE SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.1/dist/umd/supabase.min.js"></script>
 
-  <div class="categoria-info" id="categoriaInfo"></div>
+<script type="module">
 
-  <main>
-    <div id="mensajeProximamente" style="display: none;"></div>
-    <div class="productos-container" id="productos"></div>
-    <p class="ayuda" id="ayudaTexto">💡 Consejo: Usa los botones + y - para ajustar las cantidades de cada producto.</p>
-    <div id="resumen"></div>
-  </main>
+/* CONFIGURACIÓN SUPABASE */
+const SUPABASE_URL = "https://wazkoegfeuttutfoqfjt.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_PwMGk7yJAN-1q_a_meHcKQ_CuWSSrgF";
 
-  <script>
-    // ========== SISTEMA DE CONTADOR DE VISITAS ==========
-    function inicializarContador() {
-      let visitas = localStorage.getItem('visitasRinconTati');
-      
-      if (!visitas) {
-        visitas = 1;
-      } else {
-        visitas = parseInt(visitas) + 1;
-      }
-      
-      localStorage.setItem('visitasRinconTati', visitas);
-      document.getElementById('contadorVisitas').textContent = visitas;
-      
-      // Animación especial cada 10 visitas
-      if (visitas % 10 === 0) {
-        celebrarVisita();
-      }
-    }
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    function celebrarVisita() {
-      const contador = document.querySelector('.contador-visitas');
-      contador.style.animation = 'none';
-      setTimeout(() => {
-        contador.style.animation = 'brillar 0.5s ease-in-out 3';
-      }, 10);
-    }
+/* FUNCIÓN PRINCIPAL: CARGAR PRODUCTOS */
+async function cargarCatalogo() {
 
-    // ========== PRODUCTOS ==========
-     const productos = [
-      { Producto: "Pie de árbol color rojo", Imagen: "https://dl.dropboxusercontent.com/scl/fi/csj9mr99n5g6hx9uj9qic/Pie-de-arbol-color-rojo.jpg?rlkey=fg5dl8o6zyznd0va6w2iv6tty&st=llj0bp60&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Dale un toque clásico y cálido a tu árbol con este hermoso pie rojo decorado con motivos navideños." },
-      { Producto: "Pie de árbol color verde", Imagen: "https://dl.dropboxusercontent.com/scl/fi/2zthpks4gv2u98ebxe7kj/Pie-de-arbol-color-verde.jpg?rlkey=7f0q4169c9ftevjzul5mo2s9i&st=qbferv2c&dl=1", Precio: 5000, Agotado: true, Categoria: "navidad", Descripcion: "Un diseño alegre con Santa, reno y muñeco de nieve que encantará a los más pequeños." },
-      { Producto: "Pie de arbol tipo cuadrille rojo", Imagen: "https://dl.dropboxusercontent.com/scl/fi/0ocf0buae5uwsxkfjso18/Pie-de-arbol-tipo-cuadrille-rojo.jpg?rlkey=7awyas7phefkx3w0h8vehaz9u&st=oa1h3zz2&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Inspirado en el tradicional estilo nórdico." },
-      { Producto: "Patas largas color rojo", Imagen: "https://dl.dropboxusercontent.com/scl/fi/lwscfcw1cu36kd834vhu2/patas-largas-color-rojo.jpg?rlkey=b3vgxh2fck5cz2ywls3c0vsq5&st=ntf87oqe&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color rojo con bufanda", Imagen: "https://dl.dropboxusercontent.com/scl/fi/416nnqycxyzi78iyzqyl7/patas-largas-color-rojo-con-bufanda.jpg?rlkey=oes4v1a4xdu0n92mflrqqny8x&st=0v0rvixg&dl=1", Precio: 4000, Agotado: true, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color rojo con barba", Imagen: "https://dl.dropboxusercontent.com/scl/fi/icm5b0u64rsctzm71ukg9/patas-largas-color-rojo-con-barba.jpg?rlkey=z3t8zlw864493lyxzykbdgmtz&st=706coig9&dl=1", Precio: 4000, Agotado: true, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color blanco", Imagen: "https://dl.dropboxusercontent.com/scl/fi/6fbin1ewa42jqx52i6fg9/patas-largas-color-blanco.jpg?rlkey=0nvz06c6rvx1fqpiehsv798ik&st=ut8j4yqf&dl=1", Precio: 4000, Agotado: true, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color beige", Imagen: "https://dl.dropboxusercontent.com/scl/fi/u3bs79l9smoy7ox67beyi/patas-largas-color-beige.jpg?rlkey=p2z4ncn5qlgia6yrzcrxv620l&st=ul4b2z1a&dl=1", Precio: 5000, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color beige con bufanda", Imagen: "https://dl.dropboxusercontent.com/scl/fi/lwa9x0rcbsbeqoaw25vkm/patas-largas-color-beige-con-bufanda.jpg?rlkey=xlzhtrsnrupx78mavsyf5e0yh&st=rvlmqjxs&dl=1", Precio: 4000, Agotado: true, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color beige con barba", Imagen: "https://dl.dropboxusercontent.com/scl/fi/x1qqhv0bebmwqbbu5gh0e/patas-largas-color-beige-con-barba.jpg?rlkey=dvamyeo8d9b2394cqw89heb2z&st=lsc90zaa&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color azul con barba", Imagen: "https://dl.dropboxusercontent.com/scl/fi/ztn3r0v0gk7vdk1ysuo3t/patas-largas-color-azul-con-barba.jpg?rlkey=slr3szkl2s70e5g9larbrosue&st=4utuyf3j&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color azul", Imagen: "https://dl.dropboxusercontent.com/scl/fi/1c8i25yxko0ljlrm894bt/patas-largas-color-azul.jpg?rlkey=5u6m97mozfmpn9pwej3m3rpe8&st=834kz4az&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Patas largas color azul 2", Imagen: "https://dl.dropboxusercontent.com/scl/fi/g450sgsnjtjx4d1xwbgj3/patas-largas-color-azul-2.jpg?rlkey=qtbw86aea7i2g0ibwuumoav2d&st=zl6lhim6&dl=1", Precio: 4000, Agotado: true, Categoria: "navidad", Descripcion: "Simpático muñeco navideño de patas largas (60 cm)." },
-      { Producto: "Calendario 3", Imagen: "https://dl.dropboxusercontent.com/scl/fi/lvfxen5fsy9nkrfncq8mb/Calendario-3.jpg?rlkey=kt90dkem7y03ooplxwci6oyqo&st=xhfy8dbs&dl=1", Precio: 5000, Categoria: "navidad", Descripcion: "Calendario navideño decorativo de 14 cm." },
-      { Producto: "Calendario 4", Imagen: "https://dl.dropboxusercontent.com/scl/fi/foh6oow62rgfcr9o7skeg/Calendario-4.jpg?rlkey=vwh0m7ybdhu5v5xg0gcmvt8y8&st=ea1j3h8p&dl=1", Precio: 5000, Categoria: "navidad", Descripcion: "Calendario navideño decorativo de 14 cm." }, 
-      { Producto: "Calendario 1", Imagen: "https://dl.dropboxusercontent.com/scl/fi/zazotrirbp1xq9ma3s9jy/Calendario-1.jpg?rlkey=cyoy8r9hs7bg9czodn6altjcg&st=fhp36qpr&dl=1", Precio: 5000, Agotado: true, Categoria: "navidad", Descripcion: "Calendario decorativo de madera (14 cm)." },
-      { Producto: "CascaNueces 3 unidades", Imagen: "https://dl.dropboxusercontent.com/scl/fi/hk2llirhou1zn7zzlq8z3/Casca-Nuece-3-pieza.jpg?rlkey=y56f0k1ow68jsxjjigl8g4qa9&st=ydswjucz&dl=1", Precio: 7000, Categoria: "navidad", Descripcion: "Set de cascanueces decorativos (13 cm)." },
-      { Producto: "CascaNueces 01 de 4 unidades", Imagen: "https://dl.dropboxusercontent.com/scl/fi/1wj8ei8mq9fnkw6evu7nj/Casca-Nueces-01-de-4-piezas.jpg?rlkey=wqopv3s35qvm7lmuldy95yb01&st=a8icszr9&dl=1", Precio: 8000, Agotado: true, Categoria: "navidad", Descripcion: "Set de cascanueces decorativos (13 cm)." },
-      { Producto: "CascaNueces 02 de 4 unidades", Imagen: "https://dl.dropboxusercontent.com/scl/fi/hx67d5gv17t5vto45u5mw/Casca-Nueces-02-de-4-piezas.jpg?rlkey=3e26lqt7atk0z0u7k22w6t3ar&st=npngz51i&dl=1", Precio: 8000, Agotado: true, Categoria: "navidad", Descripcion: "Set de cascanueces decorativos (13 cm)." },   
-      { Producto: "CascaNueces 05 de 4 unidades", Imagen: "https://dl.dropboxusercontent.com/scl/fi/cfpgmyojncui0jf1fnrtw/Casca-Nueces-05-de-4-piezas.jpg?rlkey=suo4moatoe18nh8af62swiy99&st=lgej393w&dl=1", Precio: 8000, Categoria: "navidad", Descripcion: "Set de cascanueces decorativos (13 cm)." },
-      { Producto: "CascaNueces Grande", Imagen: "https://dl.dropboxusercontent.com/scl/fi/pxtebeay4xgp2uzt8doiq/Cascanueces-grande.jpg?rlkey=dtwubtzchebwymmh3b2kddr3a&st=5jq4o6mg&dl=1", Precio: 9000, Agotado: true, Categoria: "navidad", Descripcion: "Cascanueces decorativo de 25 cm de alto, perfecto para dar un toque clásico y elegante a tu decoración navideña." },
-      { Producto: "CascaNueces de 6 unidades", Imagen: "https://dl.dropboxusercontent.com/scl/fi/nuwvh0vhd2pwvp5u0w82p/Cascanueces-de-6-unidades.jpg?rlkey=3b42785p24o5ijjr5g5yfvevl&st=47p87g1w&dl=1", Precio: 10000, Categoria: "navidad", Descripcion: "Set de 6 cascanueces decorativos, ideal para ambientar mesas, repisas o complementar tu decoración navideña." },
-      { Producto: "CascaNueces de 6 unidades Blanco y Rojo", Imagen: "https://dl.dropboxusercontent.com/scl/fi/sqgjgfemtp3dpn0ew8srs/cascanueces-color-blanco-y-rojo-6-unidades.jpg?rlkey=rt59bfapun17zsvbby1lc15na&st=9mt2a8x5&dl=1", Precio: 10000, Categoria: "navidad", Descripcion: "Set de 6 cascanueces decorativos, ideal para ambientar mesas, repisas o complementar tu decoración navideña." },    
-      { Producto: "Colgante 01", Imagen: "https://dl.dropboxusercontent.com/scl/fi/ba6vu9ixnwuiu0gcuisux/Colgante-01.jpg?rlkey=gcull6ljwp5rx331boa6ltykq&st=lfc8l0px&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Colgante decorativo navideño." },
-      { Producto: "Colgante 02", Imagen: "https://dl.dropboxusercontent.com/scl/fi/txcihhnb1zz8o2z3wq3hm/Colgante-02.jpg?rlkey=9zsejyc9zx4he0s5n3veq7bjy&st=1y5clpiq&dl=1", Precio: 4000, Categoria: "navidad", Descripcion: "Colgante decorativo navideño." },     
-      { Producto: "Esfera 03", Imagen: "https://dl.dropboxusercontent.com/scl/fi/f6q7xxxzp6xabwcatpueb/esfera-03.jpg?rlkey=cvw1jeo9tnxty25y90vw4uyat&st=rxpmfnio&dl=1", Precio: 2500, Categoria: "navidad", Descripcion: "Esfera navideña decorativa con Papá Noel." },
-      { Producto: "Figura con luz, bailarín color rojo", Imagen: "https://dl.dropboxusercontent.com/scl/fi/8msrcuuf9b8g5yuxax1dw/Figura-con-luz-bailar-n-color-rojo.jpg?rlkey=si71aenu3pawg5cevvzqep3ns&st=97kd1e7k&dl=1", Precio: 5000, Categoria: "navidad", Descripcion: "Figura decorativa con luz y movimiento en rojo." },
-      { Producto: "Figura con luz - bailarín color verde", Imagen: "https://dl.dropboxusercontent.com/scl/fi/bqgmlbifn0mj5mn8ib3a7/Figura-con-luz-bailar-n-color-verde.jpg?rlkey=4c7bddrdnxcmwv794zs2lziyb&st=7y78o4xo&dl=1", Precio: 5000, Categoria: "navidad", Descripcion: "Figura decorativa con luz y movimiento en verde." },
-      { Producto: "Servilletero color rojo 01", Imagen: "https://dl.dropboxusercontent.com/scl/fi/k18xxy9e41nvgifpfjwjj/servilletero-color-rojo-01.jpg?rlkey=zqlt47duf8u3vivo088h4tyvr&st=4orfvg8n&dl=1", Precio: 2000, Categoria: "navidad", Descripcion: "Servilletero navideño de madera (5.5 cm)." },
-      { Producto: "Servilletero color rojo 02", Imagen: "https://dl.dropboxusercontent.com/scl/fi/n1ppc1h4bbmm7zbvpsnk1/servilletero-color-rojo-02.jpg?rlkey=t3p0kvlmfjg4fcau9kcqbtasb&st=my04vt9a&dl=1", Precio: 2000, Categoria: "navidad", Descripcion: "Servilletero navideño de madera (5.5 cm)." },
-      { Producto: "Tren color rojo con blanco", Imagen: "https://dl.dropboxusercontent.com/scl/fi/6eal2asopistcdh8lfyj9/Tren-color-rojo-con-blanco.jpg?rlkey=9bv3fsb9fwn3my0f5j4xxmx8b&st=fu0ujg2m&dl=1", Precio: 5000, Agotado: true, Categoria: "navidad", Descripcion: "Tren navideño decorativo de 20 cm." },   
-      { Producto: "Tren largo color blanco", Imagen: "https://dl.dropboxusercontent.com/scl/fi/dhvhhtjmunrjimjfef04m/Tren-largo-color-blanco.jpg?rlkey=2hhqmh88jwomnowv5nu5hhh0e&st=wzt3szkd&dl=1", Precio: 7000, Categoria: "navidad", Descripcion: "Tren navideño blanco con detalles dorados (24 cm)." },
-      { Producto: "Tren largo color rojo con verde", Imagen: "https://dl.dropboxusercontent.com/scl/fi/rpu0n782c8a6nuu0rba3f/Tren-largo-color-rojo-con-verde.jpg?rlkey=0bm1jkiaizv4qtyugbyqfopcf&st=et3jwe80&dl=1", Precio: 7000, Categoria: "navidad", Descripcion: "Tren navideño rojo y verde (24 cm)." },
-      { Producto: "Tren mas largo color rojo con blanco", Imagen: "https://dl.dropboxusercontent.com/scl/fi/sleel5jinurz0r3sn3fwz/Tren-mas-largo-color-rojo-con-blanco.jpg?rlkey=11ars95r8bsse6j9618rrvc55&st=aqwlzxui&dl=1", Precio: 10000, Categoria: "navidad", Descripcion: "Tren navideño rojo y blanco (38 a 41 cm)." },
-      { Producto: "Tren mas largo color rojo con verde", Imagen: "https://dl.dropboxusercontent.com/scl/fi/eysojx0yhr0sxbma4gk59/Tren-mas-largo-color-rojo-con-verde.jpg?rlkey=8llz86jns7dbyp9pvbvnbaxnu&st=nif144i8&dl=1", Precio: 10000, Categoria: "navidad", Descripcion: "Tren navideño rojo y verde (38 a 41 cm)." },
-      { Producto: "Tren de colores", Imagen: "https://dl.dropboxusercontent.com/scl/fi/d5r1fczbm5py4wo2iamiy/Tren-de-colores.jpg?rlkey=3oevc64m4kmedisdjl7o7n3pv&st=ir6a53hd&dl=1", Precio: 5000, Categoria: "navidad", Descripcion: "Tren decorativo multicolor de aproximadamente 20 cm, ideal para complementar tu ambientación navideña." },
-      /*promociones*/
-      { Producto: "Combo navideño 4", Imagen: "https://dl.dropboxusercontent.com/scl/fi/w4kmy68tmpvtywk6orupo/Combo-navide-o-4.jpg?rlkey=tk8lbej8a6nk325exivwoxhof&st=zpjx3ke3&dl=1", Precio: 13000, Categoria: "promociones", Descripcion: "Dale un toque completo de magia navideña a tu hogar con este combo especial. Incluye 1 bota decorativa, 1 pie de árbol, 1 proyector navideño, y 1 gorro musical con luces, perfecto para ambientar cualquier espacio con color, música y alegría. Un set ideal para quienes quieren disfrutar la Navidad al máximo." },
-      { Producto: "Combo navideño 3", Imagen: "https://dl.dropboxusercontent.com/scl/fi/q7149bfkoru4ddem4h3qa/Combo-navide-o-3.jpg?rlkey=69klnt2r6n8iw2ycxj0hglmqy&st=gholwrs8&dl=1", Precio: 10000, Categoria: "promociones", Descripcion: "Decora tu hogar con este combo navideño lleno de encanto. Incluye 1 tren chico, 1 esfera decorativa, 1 bota navideña y 1 reno colgante para puerta, ideales para darle un toque cálido y festivo a cada rincón. Un set perfecto para complementar tu decoración y sorprender a tu familia y visitas." },
-      { Producto: "Combo navideño 2", Imagen: "https://dl.dropboxusercontent.com/scl/fi/0up5pb12ahz5aj01lxqae/Combo-navide-o-2.jpg?rlkey=wo6xj6o9fifpdb0uv4j3ikrpb&st=crb784h4&dl=1", Precio: 14000, Categoria: "promociones", Descripcion: "Este combo incluye 3 cascanueces, 2 servilleteros y 1 árbol musical que baila. Un set perfecto para darle un toque festivo y alegre a tu decoración navideña." },
-      { Producto: "Combo navideño 1", Imagen: "https://dl.dropboxusercontent.com/scl/fi/mqstdne15jz2d1zw591ru/Combo-navide-o-1.jpg?rlkey=50a0bi4izcnfkdn11g7u4kv7s&st=yc0wqd8v&dl=1", Precio: 10000, Categoria: "promociones", Descripcion: "Esta promoción incluye 1 patas largas, 1 servilletero, 1 bota navideña y 1 tren chico. Un conjunto ideal para sumar encanto y alegría a tu decoración de Navidad." },
-      /*Hogar*/
-      { Producto: "Vaso tipo Starbuck", Imagen: "https://dl.dropboxusercontent.com/scl/fi/galqdgkvgruchocnvd53y/VASO-TIPO-STARBUCK.jpg?rlkey=986x6p5b6f6iapso2utcsq3ws&st=rhlw2fud&dl=1", Precio: 2000, Categoria: "hogar", Descripcion: "Disponible en colores morado, rosado, celeste, fucsia, negro y blanco, perfectos para combinar con cualquier estilo." },
-      { Producto: "Set de Utensilios de Selicona", Imagen: "https://dl.dropboxusercontent.com/scl/fi/vlliu53wi9t1qvo4ppl7q/Set-de-utencilio-de-cocina.jpg?rlkey=0hdkenmfgzy8wz4rm55xyjzm1&st=gki13o3o&dl=1", Precio: 4000, Categoria: "hogar", Descripcion: "Set de 5 utensilios de silicona, prácticos, resistentes y perfectos para cocinar con mayor comodidad y seguridad." },
-      { Producto: "Botellas de Silicona Plegable", Imagen: "https://dl.dropboxusercontent.com/scl/fi/ukgkd8fplfgstskum6fen/Botellas-de-silicona-plegable.jpg?rlkey=nmc3xhtz4ivsiaeb8p0jjz1jt&st=tkwiauh2&dl=1", Precio: 3000, Agotado: true, Categoria: "hogar", Descripcion: "Botellas plegables de silicona, disponibles en colores celeste y naranjo. Prácticas, livianas y perfectas para llevar a cualquier lugar." },    
-     { Producto: "Botella Spray Aceite 200 ml", Imagen: "https://dl.dropboxusercontent.com/scl/fi/g8gi4ydxol710cbkbeufq/Botella-spray-aceite-200-ml.jpg?rlkey=2964yfg2ivyabgidz4mg4oqb6&st=7obhl03r&dl=1", Precio: 4000, Agotado: true, Categoria: "hogar", Descripcion: "Botella spray para aceite de 200 ml, ideal para cocinar con mejor control y aplicar la cantidad justa en tus preparaciones." }, 
-      /*Niños*/
-      { Producto: "Kit para Niños Grande", Imagen: "https://dl.dropboxusercontent.com/scl/fi/abqamuqvht64xruww0lj5/1-KIT-PARA-NI-OS-GRANDES.jpg?rlkey=9imamrq7fmmtcwgqlncxbvoqn&st=rsibmrhx&dl=1", Precio: 4000, Categoria: "ninos", Descripcion: "Set escolar que incluye 2 libretas para dibujar, lápices de colores, 2 lápices mina, 1 regla, 1 goma, 2 sacapuntas y 1 estuche metálico. Perfecto para actividades creativas y escolares." },
-      { Producto: "Kit para Niños color Celeste", Imagen: "https://dl.dropboxusercontent.com/scl/fi/6xs1azu0grs6i95qg3r9b/2-KIT-PARA-NI-OS-celeste.jpg?rlkey=7w1789aawnnwba0gj0t3tbojf&st=3dsb4jsp&dl=1", Precio: 2000, Categoria: "ninos", Descripcion: "Incluye 1 sacapunta, 1 goma, 2 lápices mina y 1 regla especial para aprender a sumar y restar. Ideal para apoyar las primeras etapas de aprendizaje." },
-      { Producto: "Kit para Niños color Verde", Imagen: "https://dl.dropboxusercontent.com/scl/fi/9uk3f95o67vn01c9no1pm/2-KIT-PARA-NI-OS-verde.jpg?rlkey=igzvatmdo19vsuidmf6wukivd&st=hyfodyyv&dl=1", Precio: 2000, Categoria: "ninos", Descripcion: "Incluye 1 sacapunta, 1 goma, 2 lápices mina y 1 regla especial para aprender a sumar y restar. Ideal para apoyar las primeras etapas de aprendizaje." },
-      { Producto: "Estuche de Plumones", Imagen: "https://dl.dropboxusercontent.com/scl/fi/e9au4r5b7jwe7rwi4uv9l/ESTUCHE-DE-PLUMONES.jpg?rlkey=ettvev04xp0p0soqfp413dh21&st=6reg46j8&dl=1", Precio: 6000, Categoria: "ninos", Descripcion: "Estuche con 48 plumones de variados colores, cada uno con punta fina y punta gruesa, perfectos para dibujar, colorear y realizar proyectos creativos." },
-      { Producto: "Jirafas Led El valor es por Cada Uno", Imagen: "https://dl.dropboxusercontent.com/scl/fi/bebzea736qcm47mlxndvt/Girafas-Led.jpg?rlkey=3psqps43ypt29kpiou7asapwk&st=ah6b3bq8&dl=1", Precio: 1500, Agotado: true, Categoria: "ninos", Descripcion: "Jirafas LED en varios colores, ideales para decorar y dar un toque luminoso y divertido a cualquier espacio. Se venden cada uno en $1.500 pesos" },
-      /*Mujer*/
-      { Producto: "Botellas de Silicona", Imagen: "https://dl.dropboxusercontent.com/scl/fi/8tqon7n4z1jqgf5fve554/Botellas-de-silicona-plegable.jpg?rlkey=2esf80o5kx738aag66vp9y3va&st=8hli0sn0&dl=1", Precio: 3000, Agotado: true, Categoria: "mujer", Descripcion: "Botellas plegables de silicona, disponibles en colores celeste y naranjo. Prácticas, livianas y perfectas para llevar a cualquier lugar." },     
-      { Producto: "Vaso tipo Starbuck", Imagen: "https://dl.dropboxusercontent.com/scl/fi/galqdgkvgruchocnvd53y/VASO-TIPO-STARBUCK.jpg?rlkey=986x6p5b6f6iapso2utcsq3ws&st=rhlw2fud&dl=1", Precio: 2000, Categoria: "mujer", Descripcion: "Disponible en colores morado, rosado, celeste, fucsia, negro y blanco, perfectos para combinar con cualquier estilo." }
+    const { data: productos, error } = await supabaseClient
+        .from("productos")
+        .select("*")
+        .order("categoria", { ascending: true });
 
-      
-    ];
- let categoriaActual = 'todas';
-    let carrito = {};
-    let descripcionVisible = [];
-
-    const categoriasInfo = {
-      todas: { nombre: "Todos los Productos", emoji: "📦" },
-      promociones: { nombre: "Promociones", emoji: "🔥" },
-      navidad: { nombre: "Navidad", emoji: "🎄" },
-      tejido: { nombre: "Tejido", emoji: "🧶" },
-      hogar: { nombre: "Hogar", emoji: "🏠" },
-      ninos: { nombre: "Niños", emoji: "👶" },
-      mujer: { nombre: "Mujer", emoji: "👗" }
-    };
-
-    function filtrarCategoria(categoria) {
-      categoriaActual = categoria;
-      
-      document.querySelectorAll('.btn-categoria').forEach(btn => {
-        btn.classList.remove('activo');
-      });
-      document.getElementById('btn-' + categoria).classList.add('activo');
-      
-      renderProductos();
-      actualizarInfoCategoria();
-    }
-
-    function actualizarInfoCategoria() {
-      const productosFiltrados = obtenerProductosFiltrados();
-      const info = categoriasInfo[categoriaActual];
-      const infoEl = document.getElementById('categoriaInfo');
-      
-      if (productosFiltrados.length > 0) {
-        infoEl.innerHTML = `${info.emoji} <strong>${info.nombre}</strong> - ${productosFiltrados.length} producto${productosFiltrados.length !== 1 ? 's' : ''} disponible${productosFiltrados.length !== 1 ? 's' : ''}`;
-        infoEl.style.display = 'block';
-      } else {
-        infoEl.style.display = 'none';
-      }
-    }
-
-    function obtenerProductosFiltrados() {
-      if (categoriaActual === 'todas') {
-        return productos;
-      }
-      return productos.filter(p => p.Categoria === categoriaActual);
-    }
-
-    function mostrarMensajeProximamente() {
-      const info = categoriasInfo[categoriaActual];
-      const mensajes = {
-        promociones: {
-          icono: "🔥",
-          titulo: "¡Ofertas Increíbles!",
-          texto: "Estamos preparando las mejores promociones y descuentos especiales para ti.",
-          extra: "Descuentos de hasta 50% en productos seleccionados"
-        },
-        tejido: {
-          icono: "🧶",
-          titulo: "Tejidos Artesanales",
-          texto: "Estamos preparando hermosos productos tejidos a mano con mucho cariño.",
-          extra: "Gorros, bufandas, mantas y más..."
-        },
-        hogar: {
-          icono: "🏠",
-          titulo: "Decoración para el Hogar",
-          texto: "Pronto encontrarás productos únicos para embellecer cada rincón de tu casa.",
-          extra: "¡Grandes sorpresas en camino!"
-        },
-        ninos: {
-          icono: "👶",
-          titulo: "Productos para Niños",
-          texto: "Estamos seleccionando los mejores productos para los más pequeños del hogar.",
-          extra: "Juguetes, ropa y accesorios especiales"
-        },
-        mujer: {
-          icono: "👗",
-          titulo: "Moda y Accesorios para Mujer",
-          texto: "Preparando una colección exclusiva pensada especialmente para ti.",
-          extra: "Accesorios, joyería y más..."
-        }
-      };
-
-      const msg = mensajes[categoriaActual];
-      
-      return `
-        <div class="mensaje-proximamente">
-          <div class="icono">${msg.icono}</div>
-          <h3>${msg.titulo}</h3>
-          <p>${msg.texto}</p>
-          <p style="font-size: 1em; color: #666; margin: 20px 0;">
-            ${msg.extra}
-          </p>
-          <div class="destacado">
-            ⏳ Estamos trabajando para tenerlo listo muy pronto
-          </div>
-          <p style="margin-top: 25px; font-size: 0.95em; color: #888;">
-            💡 Mientras tanto, explora nuestras otras categorías disponibles
-          </p>
-        </div>
-      `;
-    }
-
-    function renderProductos() {
-      const contenedor = document.getElementById("productos");
-      const mensajeEl = document.getElementById("mensajeProximamente");
-      const ayudaEl = document.getElementById("ayudaTexto");
-      const productosFiltrados = obtenerProductosFiltrados();
-      
-      if (productosFiltrados.length === 0) {
-        contenedor.innerHTML = '';
-        mensajeEl.innerHTML = mostrarMensajeProximamente();
-        mensajeEl.style.display = 'block';
-        ayudaEl.style.display = 'none';
+    if (error) {
+        document.getElementById("contenedor-categorias").innerHTML =
+            "<p>Error cargando productos.</p>";
         return;
-      }
-      
-      mensajeEl.style.display = 'none';
-      ayudaEl.style.display = 'block';
-      contenedor.innerHTML = "";
-      
-      productosFiltrados.forEach((p) => {
-        const i = productos.indexOf(p);
-        const cantidad = carrito[i] || 0;
-        const enCarrito = cantidad > 0;
-        const mostrarDescripcion = descripcionVisible.includes(i);
-        
-        contenedor.innerHTML += `
-          <div class="producto">
-            <img src="${p.Imagen}" alt="${p.Producto}">
-            <h3>${p.Producto}</h3>
-            <p class="precio">${p.Precio.toLocaleString('es-CL')}</p>
-            ${p.Descripcion ? `<button class="btn-ver" onclick="toggleDescripcion(${i})">${mostrarDescripcion ? "Cerrar Descripción" : "Ver Descripción"}</button>` : ""}
-            ${mostrarDescripcion && p.Descripcion ? `<p class="descripcion">${p.Descripcion}</p>` : ""}
-
-          ${p.Agotado ? 
-           '<p style="color: #ffffff; font-weight: bold; font-size: 1.1em; margin: 10px 0; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); padding: 12px; border-radius: 10px; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); text-transform: uppercase; letter-spacing: 1px; border: 2px solid #c0392b;">⚠️ PRODUCTO AGOTADO</p>'
-           :   
-           
-           !enCarrito ? 
-             
-              `<button onclick="agregarAlCarrito(${i})" class="btn-elegir">Elegir</button>` 
-              : 
-              `<div class="cantidad-controls">
-                <button onclick="disminuir(${i})" class="btn-cantidad">−</button>
-                <span class="cantidad-numero">${cantidad}</span>
-                <button onclick="aumentar(${i})" class="btn-cantidad">+</button>
-              </div>
-              <button onclick="quitarDelCarrito(${i})" class="btn-quitar">🗑️ Quitar del carrito</button>`
-            }
-          </div>
-        `;
-      });
     }
 
-    function toggleDescripcion(i) {
-      const index = descripcionVisible.indexOf(i);
-      if (index === -1) {
-        descripcionVisible.push(i);
-      } else {
-        descripcionVisible.splice(index, 1);
-      }
-      renderProductos();
+    // Agrupar productos por categoría
+    let categorias = {};
+
+    productos.forEach(p => {
+        if (!categorias[p.categoria]) categorias[p.categoria] = [];
+        categorias[p.categoria].push(p);
+    });
+
+    let html = "";
+
+    // Construir HTML por categoría
+    for (let categoria in categorias) {
+
+        html += `<h2>${categoria}</h2>`;
+        html += `<div class="categoria">`;
+
+        categorias[categoria].forEach(p => {
+
+            html += `
+                <div class="producto">
+                    <img src="${p.imagen_url}">
+                    <div class="precio">$${p.precio}</div>
+                    <div>${p.nombre}</div>
+                    <div>${p.descripcion}</div>
+                    ${p.agotado ? `<span class="agotado">AGOTADO</span>` : ""}
+                </div>
+            `;
+        });
+
+        html += `</div>`;
     }
 
-    function agregarAlCarrito(i) {
-      carrito[i] = 1;
-      renderProductos();
-      mostrarResumen();
-      actualizarContador();
-    }
+    document.getElementById("contenedor-categorias").innerHTML = html;
+}
 
-    function aumentar(i) {
-      if (carrito[i] < 99) {
-        carrito[i]++;
-        renderProductos();
-        mostrarResumen();
-        actualizarContador();
-      }
-    }
+cargarCatalogo();
 
-    function disminuir(i) {
-      if (carrito[i] > 1) {
-        carrito[i]--;
-        renderProductos();
-        mostrarResumen();
-        actualizarContador();
-      }
-    }
+</script>
 
-    function quitarDelCarrito(i) {
-      delete carrito[i];
-      renderProductos();
-      mostrarResumen();
-      actualizarContador();
-    }
-
-    function limpiarCarrito() {
-      if (confirm("¿Estás seguro de que quieres vaciar todo el carrito?")) {
-        carrito = {};
-        renderProductos();
-        mostrarResumen();
-        actualizarContador();
-      }
-    }
-
-    function calcularTotal() {
-      let total = 0;
-      for (let i in carrito) {
-        total += productos[i].Precio * carrito[i];
-      }
-      return total;
-    }
-
-    function mostrarResumen() {
-      const resumen = document.getElementById("resumen");
-      const items = Object.keys(carrito);
-      
-      if (items.length === 0) {
-        resumen.innerHTML = "<p>No has seleccionado productos.</p>";
-        return;
-      }
-
-      let texto = "<h3>🛒 Tu Carrito de Compras</h3>";
-      
-      items.forEach(i => {
-        const prod = productos[i];
-        const cant = carrito[i];
-        const subtotal = prod.Precio * cant;
-        
-        texto += `
-          <div class="resumen-item">
-            <span class="resumen-producto">${prod.Producto}</span>
-            <br>
-            <span class="resumen-cantidad">${cant}x ${prod.Precio.toLocaleString('es-CL')}</span>
-            <span class="resumen-subtotal">${subtotal.toLocaleString('es-CL')}</span>
-          </div>
-        `;
-      });
-
-      const total = calcularTotal();
-      texto += `
-        <div class="total-final">
-          TOTAL: ${total.toLocaleString('es-CL')}
-        </div>
-        <p>Por favor ingresa tu nombre para continuar:</p>
-        <input id='nombreCliente' type='text' class='nombre-input' placeholder='Tu nombre aquí'>
-        <br>
-        <button onclick='enviarWhatsApp()' class='btn-whatsapp'>📱 Enviar pedido por WhatsApp</button>
-        <button onclick='limpiarCarrito()' class='btn-whatsapp btn-limpiar'>🗑️ Vaciar carrito</button>
-      `;
-      
-      resumen.innerHTML = texto;
-    }
-
-    function enviarWhatsApp() {
-      const nombre = document.getElementById("nombreCliente").value.trim();
-      if (!nombre) {
-        alert("Por favor, ingresa tu nombre para continuar.");
-        return;
-      }
-      
-      let mensaje = `Hola, soy ${nombre}. Me gustaría comprar:\n\n`;
-      
-      for (let i in carrito) {
-        const prod = productos[i];
-        const cant = carrito[i];
-        const subtotal = prod.Precio * cant;
-        mensaje += `• ${cant}x ${prod.Producto} = ${subtotal.toLocaleString('es-CL')}\n`;
-      }
-      
-      const total = calcularTotal();
-      mensaje += `\n💰 TOTAL: ${total.toLocaleString('es-CL')}`;
-      
-      const url = "https://wa.me/56973500652?text=" + encodeURIComponent(mensaje);
-      window.open(url, "_blank");
-    }
-
-    function irAlResumen() {
-      const resumen = document.getElementById("resumen");
-      resumen.scrollIntoView({ behavior: "smooth" });
-    }
-
-    function actualizarContador() {
-      const contador = document.getElementById("contadorCarritoFijo");
-      const totalItems = Object.values(carrito).reduce((sum, cant) => sum + cant, 0);
-      if (contador) contador.textContent = totalItems;
-    }
-
-    window.onload = function() {
-      renderProductos();
-      actualizarInfoCategoria();
-    };
-  </script>
 </body>
 </html>
