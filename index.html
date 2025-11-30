@@ -5,209 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catálogo de Productos - El Rincón de la Tati</title>
 
-    <!-- Estilos originales (completos tal como estaban) -->
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffefe3;
-            text-align: center;
-        }
+        body { margin: 0; font-family: Arial; background: #ffefe3; text-align: center; }
+        header { background: #b22222; padding: 20px; color: white; font-size: 28px; font-weight: bold; }
+        .subtitulo { font-size: 18px; margin-top: -10px; color: #6b0000; }
 
-        header {
-            background-color: #b22222;
-            padding: 20px;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .subtitulo {
-            margin-top: -10px;
-            font-size: 18px;
-            color: #6b0000;
-        }
-
-        .categorias {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 25px 0;
-        }
-
+        .categorias { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 25px 0; }
         .cat-btn {
-            background-color: white;
-            padding: 12px 22px;
-            border-radius: 25px;
-            border: 3px solid #e0a142;
-            font-size: 17px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
+            background: white; padding: 12px 22px; border-radius: 25px;
+            border: 3px solid #e0a142; font-size: 17px; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; transition: 0.3s;
         }
+        .cat-btn:hover { transform: scale(1.07); background: #fff5db; }
+        .activo { background: #b22222; color: white; border-color: #7a0000; }
 
-        .cat-btn:hover {
-            transform: scale(1.07);
-            background-color: #fff5db;
-        }
-
-        .activo {
-            background-color: #b22222 !important;
-            color: white !important;
-            border-color: #7a0000 !important;
-        }
-
-        .productos {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-
+        .productos { max-width: 900px; margin: auto; padding: 20px; }
         .item {
-            background: white;
-            margin: 15px auto;
-            padding: 15px;
-            border-radius: 15px;
-            border: 3px solid #e0a142;
-            width: 80%;
-            max-width: 600px;
-            text-align: left;
-            display: flex;
-            gap: 15px;
-            align-items: center;
+            background: white; margin: 15px auto; padding: 15px; border-radius: 15px;
+            border: 3px solid #e0a142; width: 80%; max-width: 600px; text-align: left;
+            display: flex; gap: 15px; align-items: center;
         }
-
-        .item img {
-            width: 110px;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #d28f2c;
-        }
-
-        .nombre {
-            font-size: 22px;
-            font-weight: bold;
-            color: #b22222;
-        }
-
-        .precio {
-            font-size: 18px;
-            color: #333;
-        }
-
-        .agotado {
-            color: red;
-            font-weight: bold;
-        }
-
+        .item img { width: 110px; height: 110px; object-fit: cover; border-radius: 10px; border: 2px solid #d28f2c; }
+        .nombre { font-size: 22px; font-weight: bold; color: #b22222; }
+        .precio { font-size: 18px; color: #333; }
+        .agotado { color: red; font-weight: bold; }
         .mensaje {
-            background-color: #ffe7c2;
-            padding: 15px;
-            margin-top: 25px;
-            border-radius: 10px;
-            border: 2px solid #e0a142;
-            font-size: 18px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
+            background: #ffe7c2; padding: 15px; border-radius: 10px; border: 2px solid #e0a142;
+            width: fit-content; margin: 25px auto 0; font-size: 18px;
+        }
+
+        /* Caja de errores visibles */
+        #errores {
+            background: #ffb3b3;
+            border: 2px solid red;
+            padding: 10px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            color: #700;
+            font-weight: bold;
+            display: none;
         }
     </style>
-
 </head>
 <body>
 
-    <header>
-        🎁 El Rincón de la Tati
-        <div class="subtitulo">Catálogo de Productos</div>
-    </header>
+<header>
+    🎁 El Rincón de la Tati
+    <div class="subtitulo">Catálogo de Productos</div>
+</header>
 
-    <!-- Botones categoría -->
-    <div class="categorias">
-        <button class="cat-btn activo" onclick="filtrar('todo')">📦 Ver Todo</button>
-        <button class="cat-btn" onclick="filtrar('promociones')">🔥 Promociones</button>
-        <button class="cat-btn" onclick="filtrar('navidad')">🎄 Navidad</button>
-        <button class="cat-btn" onclick="filtrar('tejido')">🧶 Tejido</button>
-        <button class="cat-btn" onclick="filtrar('hogar')">🏠 Hogar</button>
-        <button class="cat-btn" onclick="filtrar('niños')">👶 Niños</button>
-        <button class="cat-btn" onclick="filtrar('mujer')">👗 Mujer</button>
-    </div>
+<div class="categorias">
+    <button class="cat-btn activo" onclick="filtrar('todo')">📦 Ver Todo</button>
+    <button class="cat-btn" onclick="filtrar('promociones')">🔥 Promociones</button>
+    <button class="cat-btn" onclick="filtrar('navidad')">🎄 Navidad</button>
+    <button class="cat-btn" onclick="filtrar('tejido')">🧶 Tejido</button>
+    <button class="cat-btn" onclick="filtrar('hogar')">🏠 Hogar</button>
+    <button class="cat-btn" onclick="filtrar('niños')">👶 Niños</button>
+    <button class="cat-btn" onclick="filtrar('mujer')">👗 Mujer</button>
+</div>
 
-    <div id="lista" class="productos"></div>
+<div id="errores"></div>
 
-    <!-- SUPABASE -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<div id="lista" class="productos"></div>
 
-    <script>
-        const supabaseUrl = "https://wazkoegfeuttutfoqfjt.supabase.co";
-        const supabaseKey = "sb_publishable_PwMGk7yJAN-1q_a_meHcKQ_CuWSSrgF";
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+<!-- Supabase versión fija -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
 
-        let productos = [];
+<script>
+const supabaseUrl = "https://wazkoegfeuttutfoqfjt.supabase.co";
+const supabaseKey = "sb_publishable_PwMGk7yJAN-1q_a_meHcKQ_CuWSSrgF";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function cargarProductos() {
-            const { data, error } = await supabase.from("productos").select("*");
+let productos = [];
 
-            if (error) {
-                console.error("Error cargando productos:", error);
-                return;
-            }
+// Mostrar errores en pantalla
+function mostrarError(msg) {
+    const box = document.getElementById("errores");
+    box.style.display = "block";
+    box.innerHTML += "<div>⚠️ " + msg + "</div>";
+}
 
-            productos = data;
-            mostrarProductos("todo");
+async function cargarProductos() {
+    try {
+        const { data, error } = await supabaseClient
+            .from("productos")
+            .select("*");
+
+        if (error) {
+            mostrarError("Error cargando productos: " + error.message);
+            return;
         }
 
-        function filtrar(cat) {
-            document.querySelectorAll(".cat-btn").forEach(btn => btn.classList.remove("activo"));
-            event.target.classList.add("activo");
-            mostrarProductos(cat);
-        }
+        productos = data;
+        mostrarProductos("todo");
 
-        function mostrarProductos(cat) {
-            const contenedor = document.getElementById("lista");
-            contenedor.innerHTML = "";
+    } catch (e) {
+        mostrarError("Error crítico: " + e.message);
+    }
+}
 
-            let listaFiltrada = productos;
+function filtrar(cat) {
+    document.querySelectorAll(".cat-btn").forEach(btn => btn.classList.remove("activo"));
+    event.target.classList.add("activo");
+    mostrarProductos(cat);
+}
 
-            if (cat !== "todo") {
-                listaFiltrada = productos.filter(p => p.categoria === cat);
-            }
+function mostrarProductos(cat) {
+    const cont = document.getElementById("lista");
+    cont.innerHTML = "";
 
-            if (listaFiltrada.length === 0) {
-                contenedor.innerHTML = `<div class="mensaje">No hay productos para esta categoría todavía.</div>`;
-                return;
-            }
+    let lista = productos;
+    if (cat !== "todo") lista = productos.filter(p => p.categoria === cat);
 
-            listaFiltrada.forEach(p => {
-                
-                // 🔥 Construcción automática de URL de imagen
-                const imagenURL = 
-                    p.imagen_url 
-                    ? `https://wazkoegfeuttutfoqfjt.supabase.co/storage/v1/object/public/productos/${p.imagen_url}`
-                    : "https://via.placeholder.com/110?text=Sin+Imagen";
+    if (lista.length === 0) {
+        cont.innerHTML = `<div class="mensaje">No hay productos para esta categoría todavía.</div>`;
+        return;
+    }
 
-                const item = document.createElement("div");
-                item.className = "item";
+    lista.forEach(p => {
+        const imgURL = p.imagen_url
+            ? `${supabaseUrl}/storage/v1/object/public/productos/${p.imagen_url}`
+            : "https://via.placeholder.com/110?text=Sin+Imagen";
 
-                item.innerHTML = `
-                    <img src="${imagenURL}" alt="${p.nombre}">
-                    <div>
-                        <div class="nombre">${p.nombre}</div>
-                        <div class="precio">$${p.precio}</div>
-                        ${p.agotado ? '<div class="agotado">AGOTADO</div>' : ""}
-                        <div>${p.descripcion}</div>
-                    </div>
-                `;
+        const item = document.createElement("div");
+        item.className = "item";
 
-                contenedor.appendChild(item);
-            });
-        }
+        item.innerHTML = `
+            <img src="${imgURL}">
+            <div>
+                <div class="nombre">${p.nombre}</div>
+                <div class="precio">$${p.precio}</div>
+                ${p.agotado ? '<div class="agotado">AGOTADO</div>' : ""}
+                <div>${p.descripcion}</div>
+            </div>
+        `;
 
-        cargarProductos();
-    </script>
+        cont.appendChild(item);
+    });
+}
+
+cargarProductos();
+</script>
 
 </body>
 </html>
