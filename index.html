@@ -1,152 +1,502 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo de Productos - El Rincón de la Tati</title>
+  <meta charset="UTF-8" />
+  <title>Catálogo de Productos - El Rincón de la Tati</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Fuente y estilos básicos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body { margin: 0; font-family: Arial; background: #ffefe3; text-align: center; }
-        header { background: #b22222; padding: 20px; color: white; font-size: 28px; font-weight: bold; }
-        .subtitulo { font-size: 18px; margin-top: -10px; color: #6b0000; }
+  <style>
+    :root {
+      --bg: #ffe9dd;
+      --bg-soft: #ffe0cf;
+      --primary: #ffb300;
+      --primary-strong: #ff8c00;
+      --accent-red: #b7000f;
+      --accent-red-soft: #d01822;
+      --text-main: #4a1f1c;
+      --shadow-soft: 0 10px 25px rgba(0,0,0,0.1);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
 
-        .categorias { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 25px 0; }
-        .cat-btn {
-            background: white; padding: 12px 22px; border-radius: 25px;
-            border: 3px solid #e0a142; font-size: 17px; cursor: pointer;
-            display: flex; align-items: center; gap: 8px; transition: 0.3s;
-        }
-        .cat-btn:hover { transform: scale(1.07); background: #fff5db; }
-        .activo { background: #b22222; color: white; border-color: #7a0000; }
+    * {
+      box-sizing: border-box;
+    }
 
-        .productos { max-width: 900px; margin: auto; padding: 20px; }
-        .item {
-            background: white; margin: 15px auto; padding: 15px; border-radius: 15px;
-            border: 3px solid #e0a142; width: 80%; max-width: 600px; text-align: left;
-            display: flex; gap: 15px; align-items: center;
-        }
-        .item img { width: 110px; height: 110px; object-fit: cover; border-radius: 10px; border: 2px solid #d28f2c; }
-        .nombre { font-size: 22px; font-weight: bold; color: #b22222; }
-        .precio { font-size: 18px; color: #333; }
-        .agotado { color: red; font-weight: bold; }
-        .mensaje {
-            background: #ffe7c2; padding: 15px; border-radius: 10px; border: 2px solid #e0a142;
-            width: fit-content; margin: 25px auto 0; font-size: 18px;
-        }
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
 
-        /* Caja de errores visibles */
-        #errores {
-            background: #ffb3b3;
-            border: 2px solid red;
-            padding: 10px;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 600px;
-            color: #700;
-            font-weight: bold;
-            display: none;
-        }
-    </style>
+    /* HEADER --------------------------------------------------------- */
+    header {
+      background: #fff7f0;
+      border-bottom: 3px solid #ffd2a1;
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 32px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 22px;
+      color: #b02a1c;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      color: #905646;
+      margin-top: -2px;
+      text-align: center;
+    }
+
+    /* CATEGORIES BAR ------------------------------------------------- */
+    .filters-wrapper {
+      max-width: 1200px;
+      margin: 16px auto 0;
+      padding: 0 16px 10px;
+    }
+
+    .filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: var(--radius-pill);
+      border: 2px solid #f6c36b;
+      padding: 10px 18px;
+      background: #fff;
+      color: #7a3a26;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .filter-btn .emoji {
+      font-size: 18px;
+    }
+
+    .filter-btn.primary {
+      background: linear-gradient(135deg, #ffb300, #ff8a00);
+      border-color: #ff9a2e;
+      color: #fff;
+    }
+
+    .filter-btn.primary .emoji {
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25));
+    }
+
+    .filter-btn.all {
+      background: linear-gradient(135deg, #b7000f, #d01822);
+      border-color: #b7000f;
+      color: #fff;
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.16);
+    }
+
+    .filter-btn.active {
+      outline: 3px solid rgba(255, 140, 0, 0.5);
+      outline-offset: 1px;
+    }
+
+    /* MAIN ----------------------------------------------------------- */
+    main {
+      max-width: 1200px;
+      margin: 18px auto 40px;
+      padding: 0 16px 40px;
+    }
+
+    .status-area {
+      margin: 24px auto 12px;
+      max-width: 820px;
+      min-height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #85412b;
+    }
+
+    .status-pill {
+      background: #fff3da;
+      border-radius: var(--radius-pill);
+      padding: 8px 18px;
+      border: 1px solid #ffd8a8;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* GRID ----------------------------------------------------------- */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin-top: 12px;
+    }
+
+    .product-card {
+      background: #fffdf9;
+      border-radius: var(--radius-lg);
+      padding: 12px 12px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid #ffd8a2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-img-wrap {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ffe3cb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s ease-out;
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.03);
+    }
+
+    .product-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .product-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #6a2d22;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #81554b;
+      min-height: 38px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .product-price {
+      font-weight: 700;
+      font-size: 16px;
+      color: #b32114;
+    }
+
+    .product-category {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ffe9d1;
+      color: #995023;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .badge-agotado {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: linear-gradient(135deg, #555, #222);
+      color: #fff;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    @media (max-width: 640px) {
+      .brand-title {
+        font-size: 18px;
+      }
+      .filters-row {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+      .filters-wrapper {
+        padding-inline: 8px;
+      }
+      main {
+        padding-inline: 8px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-row">
+        <div class="brand-logo">🎁</div>
+        <div>
+          <div class="brand-title">El Rincón de la Tati</div>
+          <div class="brand-subtitle">Catálogo de Productos</div>
+        </div>
+      </div>
+    </div>
+    <!-- FILTERS -->
+    <div class="filters-wrapper">
+      <div class="filters-row" id="category-bar">
+        <button class="filter-btn all active" data-category="all">
+          <span class="emoji">📦</span>
+          <span>Ver Todo</span>
+        </button>
 
-<header>
-    🎁 El Rincón de la Tati
-    <div class="subtitulo">Catálogo de Productos</div>
-</header>
+        <button class="filter-btn primary" data-category="promociones">
+          <span class="emoji">🔥</span>
+          <span>Promociones</span>
+        </button>
 
-<div class="categorias">
-    <button class="cat-btn activo" onclick="filtrar('todo')">📦 Ver Todo</button>
-    <button class="cat-btn" onclick="filtrar('promociones')">🔥 Promociones</button>
-    <button class="cat-btn" onclick="filtrar('navidad')">🎄 Navidad</button>
-    <button class="cat-btn" onclick="filtrar('tejido')">🧶 Tejido</button>
-    <button class="cat-btn" onclick="filtrar('hogar')">🏠 Hogar</button>
-    <button class="cat-btn" onclick="filtrar('niños')">👶 Niños</button>
-    <button class="cat-btn" onclick="filtrar('mujer')">👗 Mujer</button>
-</div>
+        <button class="filter-btn" data-category="navidad">
+          <span class="emoji">🎄</span>
+          <span>Navidad</span>
+        </button>
 
-<div id="errores"></div>
+        <button class="filter-btn" data-category="tejido">
+          <span class="emoji">🧶</span>
+          <span>Tejido</span>
+        </button>
 
-<div id="lista" class="productos"></div>
+        <button class="filter-btn" data-category="hogar">
+          <span class="emoji">🏠</span>
+          <span>Hogar</span>
+        </button>
 
-<!-- Supabase versión fija -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+        <button class="filter-btn" data-category="niños">
+          <span class="emoji">👶</span>
+          <span>Niños</span>
+        </button>
 
-<script>
-const supabaseUrl = "https://wazkoegfeuttutfoqfjt.supabase.co";
-const supabaseKey = "sb_publishable_PwMGk7yJAN-1q_a_meHcKQ_CuWSSrgF";
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+        <button class="filter-btn" data-category="mujer">
+          <span class="emoji">👗</span>
+          <span>Mujer</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-let productos = [];
+  <!-- MAIN -->
+  <main>
+    <div class="status-area">
+      <div id="status-pill" class="status-pill">Cargando productos...</div>
+    </div>
 
-// Mostrar errores en pantalla
-function mostrarError(msg) {
-    const box = document.getElementById("errores");
-    box.style.display = "block";
-    box.innerHTML += "<div>⚠️ " + msg + "</div>";
-}
+    <section id="products-grid" class="products-grid">
+      <!-- Tarjetas generadas por JavaScript -->
+    </section>
+  </main>
 
-async function cargarProductos() {
-    try {
+  <!-- Supabase JS v2 desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // === CONFIGURACIÓN SUPABASE ========================================
+    const SUPABASE_URL = 'https://wazkoegfeuttutfoqfjt.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhemtvZWdmZXV0dHV0Zm9xZmp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQzOTExNDUsImV4cCI6MjA3OTk2NzE0NX0.9DUTvS_tekHNPFZHCA_6XHIfQ9ize40xXKP54XZf84k';
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const TABLE_NAME = 'productos';
+
+    const gridEl = document.getElementById('products-grid');
+    const statusPill = document.getElementById('status-pill');
+    const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
+
+    let allProducts = [];
+    let activeCategory = 'all';
+
+    // === CARGA INICIAL ================================================
+    async function fetchProducts() {
+      try {
+        statusPill.textContent = 'Cargando productos...';
+
         const { data, error } = await supabaseClient
-            .from("productos")
-            .select("*");
+          .from(TABLE_NAME)
+          .select('*')
+          .order('created_at', { ascending: false });
 
-        if (error) {
-            mostrarError("Error cargando productos: " + error.message);
-            return;
+        if (error) throw error;
+
+        allProducts = data || [];
+
+        if (!allProducts.length) {
+          statusPill.textContent = 'Por ahora no hay productos cargados 🥹';
+          gridEl.innerHTML = '';
+          return;
         }
 
-        productos = data;
-        mostrarProductos("todo");
-
-    } catch (e) {
-        mostrarError("Error crítico: " + e.message);
+        statusPill.textContent = '';
+        renderProducts();
+      } catch (err) {
+        console.error('Error al cargar productos:', err);
+        statusPill.textContent = 'Ocurrió un error al cargar los productos. Intenta nuevamente más tarde.';
+      }
     }
-}
 
-function filtrar(cat) {
-    document.querySelectorAll(".cat-btn").forEach(btn => btn.classList.remove("activo"));
-    event.target.classList.add("activo");
-    mostrarProductos(cat);
-}
+    // === RENDER =======================================================
+    function renderProducts() {
+      gridEl.innerHTML = '';
 
-function mostrarProductos(cat) {
-    const cont = document.getElementById("lista");
-    cont.innerHTML = "";
+      let productosFiltrados;
+      if (activeCategory === 'all') {
+        productosFiltrados = allProducts;
+      } else {
+        productosFiltrados = allProducts.filter(p => {
+          const cat = (p.categoria || '').toLowerCase().trim();
+          return cat === activeCategory;
+        });
+      }
 
-    let lista = productos;
-    if (cat !== "todo") lista = productos.filter(p => p.categoria === cat);
-
-    if (lista.length === 0) {
-        cont.innerHTML = `<div class="mensaje">No hay productos para esta categoría todavía.</div>`;
+      if (!productosFiltrados.length) {
+        statusPill.textContent = 'No hay productos para esta categoría todavía.';
         return;
+      } else {
+        statusPill.textContent = '';
+      }
+
+      productosFiltrados.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'product-card';
+
+        if (p.agotado) {
+          const agotadoTag = document.createElement('div');
+          agotadoTag.className = 'badge-agotado';
+          agotadoTag.textContent = 'AGOTADO';
+          card.appendChild(agotadoTag);
+        }
+
+        // Imagen
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'product-img-wrap';
+        const img = document.createElement('img');
+        img.className = 'product-img';
+        img.src = p.imagen_url || '';
+        img.alt = p.nombre || 'Producto';
+        img.loading = 'lazy';
+        img.onerror = () => {
+          imgWrap.style.background = '#f1d0b4';
+          img.style.display = 'none';
+        };
+        imgWrap.appendChild(img);
+        card.appendChild(imgWrap);
+
+        // Contenido
+        const body = document.createElement('div');
+        body.className = 'product-body';
+
+        const title = document.createElement('h3');
+        title.className = 'product-title';
+        title.textContent = p.nombre || 'Producto sin nombre';
+        body.appendChild(title);
+
+        const desc = document.createElement('p');
+        desc.className = 'product-desc';
+        desc.textContent = p.descripcion || '';
+        body.appendChild(desc);
+
+        const footer = document.createElement('div');
+        footer.className = 'product-footer';
+
+        const price = document.createElement('span');
+        price.className = 'product-price';
+        if (p.precio != null) {
+          const num = Number(p.precio);
+          price.textContent = '$' + num.toLocaleString('es-CL');
+        } else {
+          price.textContent = '';
+        }
+        footer.appendChild(price);
+
+        const catSpan = document.createElement('span');
+        catSpan.className = 'product-category';
+        catSpan.textContent = (p.categoria || '').toUpperCase();
+        footer.appendChild(catSpan);
+
+        body.appendChild(footer);
+        card.appendChild(body);
+
+        gridEl.appendChild(card);
+      });
     }
 
-    lista.forEach(p => {
-        const imgURL = p.imagen_url
-            ? `${supabaseUrl}/storage/v1/object/public/productos/${p.imagen_url}`
-            : "https://via.placeholder.com/110?text=Sin+Imagen";
+    // === EVENTOS DE FILTRO ===========================================
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-        const item = document.createElement("div");
-        item.className = "item";
-
-        item.innerHTML = `
-            <img src="${imgURL}">
-            <div>
-                <div class="nombre">${p.nombre}</div>
-                <div class="precio">$${p.precio}</div>
-                ${p.agotado ? '<div class="agotado">AGOTADO</div>' : ""}
-                <div>${p.descripcion}</div>
-            </div>
-        `;
-
-        cont.appendChild(item);
+        const cat = btn.dataset.category;
+        activeCategory = cat === 'all' ? 'all' : cat.toLowerCase();
+        renderProducts();
+      });
     });
-}
 
-cargarProductos();
-</script>
-
+    // Iniciar
+    fetchProducts();
+  </script>
 </body>
 </html>
