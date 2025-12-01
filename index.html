@@ -394,14 +394,32 @@
 
       tarjeta.appendChild(precioLinea);
 
-      // Botón "Ver descripción"
+      // Botón "Ver descripción" con toggle debajo
       const btnDesc = document.createElement('button');
       btnDesc.className = 'btn-descripcion';
       btnDesc.textContent = '📄 Ver descripción';
+
+      // Contenedor de descripción (debajo del botón, oculto al inicio)
+      const descBox = document.createElement('div');
+      descBox.style.display = 'none';
+      descBox.style.margin = '8px 0 4px';
+      descBox.style.background = '#fff6e8';
+      descBox.style.border = '1px solid #f1c27d';
+      descBox.style.borderRadius = '10px';
+      descBox.style.padding = '10px';
+      descBox.style.fontSize = '14px';
+      descBox.textContent = prod.descripcion || 'Sin descripción.';
+
       btnDesc.addEventListener('click', () => {
-        alert(prod.descripcion || 'Sin descripción.');
+        const visible = descBox.style.display === 'block';
+        descBox.style.display = visible ? 'none' : 'block';
+        btnDesc.textContent = visible
+          ? '📄 Ver descripción'
+          : '📄 Ocultar descripción';
       });
+
       tarjeta.appendChild(btnDesc);
+      tarjeta.appendChild(descBox);
 
       if (prod.agotado) {
         // SOLO MENSAJE DE AGOTADO ABAJO
@@ -549,4 +567,3 @@
 
 </body>
 </html>
-
