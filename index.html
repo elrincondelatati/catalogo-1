@@ -117,6 +117,23 @@
             z-index: 10;
         }
 
+        /* ------------------- ETIQUETA LIQUIDACIÓN (NUEVO) ------------------- */
+        .liquidacion-label-catalogo {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-8deg);
+            background: #FFD700; /* Amarillo/Dorado */
+            color: #c62828; /* Rojo oscuro */
+            padding: 7px 18px;
+            font-size: 17px;
+            font-weight: 700;
+            border-radius: 8px;
+            border: 3px solid #c62828;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            z-index: 10;
+        }
+
         /* ------------------- DETALLES DEL PRODUCTO ------------------- */
         .nombre-producto {
             margin: 12px 0 4px;
@@ -242,7 +259,6 @@
     <span class="btn-cat" data-cat="hogar">🏠 Hogar</span>
     <span class="btn-cat" data-cat="niños">👶 Niños</span>
     <span class="btn-cat" data-cat="mujer">👗 Mujer</span>
-    <span class="btn-cat" data-cat="decoracion">🌟 Decoración</span>
 </div>
 
 <div class="contenedor-productos" id="lista-productos"></div>
@@ -304,9 +320,10 @@
 
   // ------------------- CARGAR PRODUCTOS -------------------
   async function cargarProductos() {
+    // Se asegura de seleccionar el campo 'liquidacion'
     const { data, error } = await supabaseClient
       .from('productos')
-      .select('*')
+      .select('*, liquidacion') 
       .order('created_at', { ascending: true });
 
     if (error) {
@@ -348,11 +365,18 @@
       const tarjeta = document.createElement('div');
       tarjeta.className = 'tarjeta';
 
-      // Cinta de AGOTADO si corresponde
+      // Lógica de etiquetas
       if (prod.agotado) {
+        // Muestra AGOTADO si está agotado
         const label = document.createElement('div');
         label.className = 'agotado-label';
         label.textContent = 'PRODUCTO AGOTADO';
+        tarjeta.appendChild(label);
+      } else if (prod.liquidacion) {
+        // Muestra LIQUIDACIÓN si está en liquidación y NO agotado
+        const label = document.createElement('div');
+        label.className = 'liquidacion-label-catalogo';
+        label.textContent = '¡LIQUIDACIÓN!';
         tarjeta.appendChild(label);
       }
 
@@ -546,7 +570,7 @@
     });
   });
 
-  // ------------------- VER / OCULTAR RESUMEN CARRITO -------------------
+  // ------------------- VER / OCULTAR RESUMEN CARRITO ------------------
   carritoBtn.addEventListener('click', () => {
     if (carrito.size === 0) return;
     const visible = resumenCarritoEl.style.display === 'block';
