@@ -17,7 +17,7 @@
 
         /* ------------------- HEADER ------------------- */
         header {
-            background: #B71C1C;
+            background: #E55B5B; /* 🔥 Color Suavizado */
             padding: 25px 0 10px;
             color: white;
             text-align: center;
@@ -259,6 +259,7 @@
     <span class="btn-cat" data-cat="hogar">🏠 Hogar</span>
     <span class="btn-cat" data-cat="niños">👶 Niños</span>
     <span class="btn-cat" data-cat="mujer">👗 Mujer</span>
+    <span class="btn-cat" data-cat="papeleria">📓 Papelería</span>
 </div>
 
 <div class="contenedor-productos" id="lista-productos"></div>
@@ -570,7 +571,7 @@
     });
   });
 
-  // ------------------- VER / OCULTAR RESUMEN CARRITO ------------------
+  // ------------------- VER / OCULTAR RESUMEN CARRITO -------------------
   carritoBtn.addEventListener('click', () => {
     if (carrito.size === 0) return;
     const visible = resumenCarritoEl.style.display === 'block';
